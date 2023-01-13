@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Create New Customer - EVA Pedio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-text mx-3"><img src="img/white-logo.png"></div>
+            </a>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home </span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="multilevel-approval.html">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Multilevel Approval</span></a>
+            </li>
+            <li class="nav-item active mt-3">
+                <a class="nav-link" href="create-customer.html">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Create Service</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onClick="logout();">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span>Signout</span>
+                </a>
+            </li>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <h6 style="margin: 25px;font-size:16px"><b>Create New Customer</b></h6>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown show bd1">
+                            <a class="nav-link dropdown-toggle" href="dashboard.html">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+
+                            </a>
+                            <!-- Dropdown - User Information -->
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="head-back">
+                        <h5 style="text-align:center;font-size: 18px;">Customer Details</h5>
+                    </div>
+                    <div class="row mt-12 maindivv">
+
+                        <!-- New request -->
+                        <div class="col-xl-12 col-md-12 mb-12">
+                            <div class="alert alert-success success_message" role="alert" style="display:none;">
+                                <i class="fa fa-check" aria-hidden="true"> </i>
+                                <span class="msg"></span>
+                            </div>
+                            <div class="alert alert-danger error_message" role="alert" style="display:none;">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                <span class="msg"></span>
+                            </div>
+                            <form>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <label class="ft-14">Company Name </label>
+                                        <input type="text" class="form-control" id="company_name" placeholder="Company Name" onkeyup="only_alphanumeric(this);" autocomplete="off" tabindex="1">
+                                        <div class="alert alert-danger company_name" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="company_name_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="ft-14">Full Name <span class="red">*</span></label>
+                                        <input type="text" class="form-control" id="full_name" placeholder="Full Name" onkeyup="only_alphanumeric(this);" autocomplete="off" tabindex="2">
+                                        <div class="alert alert-danger full_name" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="full_name_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <div class="">
+                                        <label class="ft-14">Branch <span class="red">*</span class="red"></label>
+                                        <!--<input type="text" class="form-control" id="branch" aria-describedby="branch" placeholder="Branch" autocomplete="off" tabindex="3" onkeyup="only_alphanumeric(this);">-->
+                                        <select class="form-control" id="branch" tabindex="3"></select>
+                                        <div class="alert alert-danger branch" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="branch_err"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <label class="ft-14">Email </label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email" autocomplete="off" tabindex="4">
+                                        <div class="alert alert-danger email" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="email_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="ft-14">Mobile No. </label>
+                                        <input type="text" class="form-control" id="mobile" placeholder="Mobile No" onkeyup="only_numeric(this);" autocomplete="off" tabindex="5" minlength="10" maxlength="10">
+                                        <div class="alert alert-danger mobile" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="mobile_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <div class="head-back mt-10">
+                                <h5 style="text-align:center;font-size: 18px;">Address Details</h5>
+                            </div>
+                            <form>
+                                <div class="form-group mt-10">
+                                    <label class="ft-14">Address Line 1</label>
+                                    <input type="text" class="form-control" id="address_line_1" placeholder="1234 Main St" onkeyup="only_alphanumeric(this);" autocomplete="off" tabindex="6">
+                                    <div class="alert alert-danger address_line_1" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="address_line_1_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Address Line 2</label>
+                                    <input type="text" class="form-control" id="address_line_2" placeholder="Apartment, studio, or floor" onkeyup="only_alphanumeric(this);" autocomplete="off" tabindex="7">
+                                    <div class="alert alert-danger address_line_2" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="address_line_2_err"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="ft-14">Landmark </label>
+                                        <input type="text" class="form-control" id="landmark" placeholder="Landmark" onkeyup="only_alphanumeric(this);" autocomplete="off" tabindex="8">
+                                        <div class="alert alert-danger landmark" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="landmark_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="ft-14">Locality </label>
+                                        <input type="text" class="form-control" id="locality" placeholder="Locality" onkeyup="only_alphanumeric(this);" autocomplete="off" tabindex="9">
+                                        <div class="alert alert-danger locality" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="locality_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-10">
+                                    <div class="col">
+                                        <label class="ft-14">City </label>
+                                        <!--<input type="text" class="form-control" id="city" placeholder="" autocomplete="off" tabindex="10" onkeyup="only_alphanumeric(this);">-->
+                                        <select class="form-control" id="city" tabindex="10"></select>
+                                        <div class="alert alert-danger city" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="city_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="ft-14">State </label>
+                                        <!--<input type="text" class="form-control" id="state" placeholder="" autocomplete="off" tabindex="11" onkeyup="only_alphanumeric(this);">-->
+                                        <select class="form-control" id="state" tabindex="11"></select>
+                                        <div class="alert alert-danger state" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="state_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-10">
+                                    <div class="col">
+                                        <label class="ft-14">Country </label>
+                                        <!--<input type="text" class="form-control" id="country" placeholder="" autocomplete="off" tabindex="12" onkeyup="only_alphanumeric(this);">-->
+                                        <select class="form-control" id="country" tabindex="12"></select>
+                                        <div class="alert alert-danger country" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="country_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="ft-14">Pin </label>
+                                        <input type="text" class="form-control" id="pin" placeholder="" autocomplete="off" tabindex="13" onkeyup="only_numeric(this);" maxlength="6">
+                                        <div class="alert alert-danger pin" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="pin_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-10 py-3">
+                                    <div class="col">
+                                        <a href="create-customer.html" class="btn btn-info btn-user btn-block" tabindex="15">
+                                        Cancel
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="javascript:void(0);" onclick="validate();" class="btn btn-info btn-user btn-block" tabindex="14">
+                                        Submit
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div class="d-flex justify-content-center loadingg" style="margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display:none !important;
+    transform: translate(-50%, -50%);">
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/scripts.js"></script>
+    <script src="js/select2.full.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select').select2();
+            GFG_Fun();
+        });
+        var name = sessionStorage.getItem("json");
+        var branchList = new Array();
+        var cityList = new Array();
+        var stateList = new Array();
+        var countryList = new Array();
+        var obj = $.parseJSON(name);
+        var employeeId = obj.employeeId;
+        var employeeName = obj.employeeName;
+
+        function validate() {
+            $(".btn").attr('disabled', true);
+            var company_name = document.getElementById("company_name").value;
+            var full_name = document.getElementById("full_name").value;
+            var branch = $("#branch option:selected").text();
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var address_line_1 = document.getElementById("address_line_1").value;
+            var address_line_2 = document.getElementById("address_line_2").value;
+            var landmark = document.getElementById("landmark").value;
+            var locality = document.getElementById("locality").value;
+            var city = $("#city option:selected").text();
+            var state = $("#state option:selected").text();
+            var country = $("#country option:selected").text();
+            var pin = document.getElementById("pin").value;
+            var str = 'true';
+            if (full_name == '') {
+                $(".full_name").show();
+                $(".full_name_err").html('Full name required.');
+                str = 'false';
+            } else {
+                $(".full_name").hide();
+                $(".full_name_err").html('');
+            }
+            if (branch == '' || branch == 'Select Branch') {
+                $(".branch").show();
+                $(".branch_err").html('Branch required.');
+                str = 'false';
+            } else {
+                $(".branch").hide();
+                $(".branch_err").html('');
+            }
+
+            if (email != '' && validateEmail(email) == false) {
+                $(".email").show();
+                $(".email_err").html('Valid email id required.');
+                str = 'false';
+            } else {
+                $(".email").hide();
+                $(".email_err").html('');
+            }
+            if (mobile == '') {
+                $(".mobile").show();
+                $(".mobile_err").html('Mobile no required.');
+                str = 'false';
+            } else if (mobile != '' && (mobile.length < 10 || mobile.length > 10)) {
+                $(".mobile").show();
+                $(".mobile_err").html('Mobile no should be 10 digit only.');
+                str = 'false';
+            } else {
+                $(".mobile").hide();
+                $(".mobile_err").html('');
+            }
+
+            if (address_line_1 == '') {
+                $(".address_line_1").show();
+                $(".address_line_1_err").html('Address line 1 required.');
+                str = 'false';
+            } else {
+                $(".address_line_1").hide();
+                $(".address_line_1_err").html('');
+            }
+            if (city == '' || city == 'Select City') {
+                $(".city").show();
+                $(".city_err").html('City required.');
+                str = 'false';
+            } else {
+                $(".city").hide();
+                $(".city_err").html('');
+            }
+            if (state == '' || state == 'Select State') {
+                $(".state").show();
+                $(".state_err").html('State required.');
+                str = 'false';
+            } else {
+                $(".state").hide();
+                $(".state_err").html('');
+            }
+
+            if (country == '' || country == 'Select Country') {
+                $(".country").show();
+                $(".country_err").html('Country required.');
+                str = 'false';
+            } else {
+                $(".country").hide();
+                $(".country_err").html('');
+            }
+            if (pin != '' && (pin.length > 6)) {
+                $(".pin").show();
+                $(".pin_err").html('Pin should be less than or equal to 6 digit.');
+                str = 'false';
+            } else {
+                $(".pin").hide();
+                $(".pin_err").html('');
+            }
+
+            if (str == 'true') {
+                jsonObj = [];
+                item = {};
+                item["screenName"] = "createCustomer";
+                item["actionTask"] = "Create";
+                item["cellNumber1"] = mobile;
+                item["companyName"] = company_name;
+                item["fullName"] = full_name;
+                item["email"] = email;
+                item["employeeName"] = employeeName;
+                item["gstNo"] = '';
+                item["branch"] = branch;
+                item["addressLine1"] = address_line_1;
+                item["addressLine2"] = address_line_2;
+                item["landmark"] = landmark;
+                item["locality"] = locality;
+                item["state"] = state;
+                item["city"] = city;
+                item["country"] = country;
+                item["pin"] = pin;
+                item["customerType"] = 'BANK';
+                item["customerCategory"] = "High";
+
+                jsonObj.push(item);
+                jsonObj = jsonObj[0];
+                jsonData = JSON.stringify(jsonObj);
+                //console.log(jsonObj);
+                $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/anylaticsDataCreation?data=" + jsonData, function(responseText) {
+                    if ($.trim(responseText) != '' && $.trim(responseText) > 0) {
+                        sessionStorage.setItem('fname', full_name);
+                        $(".success_message").show();
+                        $(".msg").html("Customer created successfully.");
+                        window.location = 'create-customer.html';
+                    } else {
+                        $(".btn").removeAttr('disabled');
+                        $(".error_message").show();
+                        $(".error_message").find('.msg').html($.trim(responseText));
+                    }
+                });
+            }
+        }
+
+        // Main function 
+        function GFG_Fun() {
+            $(".maindivv").hide();
+            $(".loadingg").show();
+            const api_url =
+                "https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/configDataCreation?employeeGroup&employeeName=" + employeeName + "&employeeId=" + employeeId + "&applicationName=EVA Pedio";
+            $.get(api_url, function(responseText) {
+
+                if (responseText.length > 0) {
+                    var obj = $.parseJSON(responseText);
+                    //console.log(obj);
+                    $.each(obj, function(key, value) {
+                        if (key == 'branchList') {
+
+                            $("#branch").html('');
+                            var branch_html = '<option value="">Select Branch</option>';
+                            for (var i = 0; i < value.length; i++) {
+                                branchList.push(value[i].branchName);
+                            }
+                            for (var i = 0; i < branchList.length; i++) {
+                                branch_html += '<option value="' + i + '">' + branchList[i] + '</option>';
+                            }
+                            $("#branch").html(branch_html);
+                        }
+                        if (key == 'city') {
+                            $("#city").html('');
+                            var city_html = '<option value="">Select City</option>';
+                            for (var i = 0; i < value.length; i++) {
+                                cityList.push(value[i].cityName);
+                            }
+                            for (var i = 0; i < cityList.length; i++) {
+                                city_html += '<option value="' + i + '">' + cityList[i] + '</option>';
+                            }
+                            $("#city").html(city_html);
+                        }
+                        if (key == 'state') {
+                            $("#state").html('');
+                            var state_html = '<option value="">Select State</option>';
+                            for (var i = 0; i < value.length; i++) {
+                                stateList.push(value[i].stateName);
+                            }
+                            for (var i = 0; i < stateList.length; i++) {
+                                state_html += '<option value="' + i + '">' + stateList[i] + '</option>';
+                            }
+                            $("#state").html(state_html);
+                        }
+                        if (key == 'countries') {
+                            $("#country").html('');
+                            var country_html = '<option value="">Select Country</option>';
+                            for (var i = 0; i < value.length; i++) {
+                                countryList.push(value[i].countryName);
+                            }
+                            for (var i = 0; i < countryList.length; i++) {
+                                country_html += '<option value="' + i + '">' + countryList[i] + '</option>';
+                            }
+                            $("#country").html(country_html);
+                        }
+                    });
+                }
+                $('.spinner-grow').css({
+                    'display': 'none'
+                });
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            });
+        }
+    </script>
+</body>
+
+</html>

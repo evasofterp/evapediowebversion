@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Register - EVA Pedio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .brand {
+            font-size: 18px;
+            padding-top: 5px;
+            color: #58a3d6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-7 col-lg-7 bg-login-image login_l"></div>
+            <div class="col-12 col-xl-5 col-lg-5 login_r">
+                <div class="p-5  r_corner">
+                    <div>
+                        <div class="text-center mt-4">
+                            <div><img src="img/logo.png"></div>
+                            <p class="brand">EVA Software Solutions</p>
+                        </div>
+                        <div class="alert alert-success success_message" role="alert" style="display:none;">
+                            <i class="fa fa-check" aria-hidden="true"> </i>
+                            <span class="msg"></span>
+                        </div>
+                        <div class="alert alert-danger error_message" role="alert" style="display:none;">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                            <span class="msg"></span>
+                        </div>
+                        <form class="p-5 align-middle">
+                            <h3>Registration</h3>
+                            <div class="form-group">
+                                <label for="evaerp_access_link">EVA ERP Access Link</label>
+                                <input type="text" onkeyup="only_alphanumeric(this);" id="evaerp_access_link" class="form-control" tabindex="1" autocomplete="off" placeholder="Access Link">
+                                <div class="alert alert-danger evaerp_access_link" role="alert" style="display:none;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                    <span class="evaerp_access_link_err"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" id="username" onkeyup="only_alphanumeric1(this);" class="form-control" placeholder="Username" autocomplete="off" tabindex="2">
+                                <div class="alert alert-danger username" role="alert" style="display:none;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                    <span class="username_err"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" class="form-control" placeholder="Password" autocomplete="off" tabindex="3">
+                                <a href="#" onclick="myFunction()" class="showhide float-right" id="hideshow">Show</a>
+                                <div class="alert alert-danger password" role="alert" style="display:none;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                    <span class="password_err"></span>
+                                </div>
+                            </div>
+
+                            <label>Select Service Type</label>
+                            <div class="form-group">
+                                <!-- <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" tabindex="4">
+                                    <label class="form-check-label" for="inlineRadio1">Day View</label>
+                                </div> -->
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label" for="inlineRadio2">Week View </label> 
+                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" tabindex="5" style="margin-left: 10px;">
+                                </div>
+                            </div>
+                            <form>
+                                <div class="form-row">
+                                    <div class="col-6">
+                                        <label style="margin-top: 6px;">Select History View</label>
+                                    </div>
+                                    <div class="col">
+                                        <select class="custom-select mr-sm-2 form-control" id="inlineFormCustomSelect" tabindex="6">
+                                            <option value="1" selected>1 Day</option>
+                                            <option value="2">2 Days</option>
+                                            <option value="3">3 Days</option>
+                                            <option value="4">4 Days</option>
+                                            <option value="5">5 Days</option>
+                                            <option value="6">6 Days</option>
+                                            <option value="7">7 Days</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                            <a href="#" onclick="check()" class="btn btn-primary btn-user btn-block" tabindex="7">
+                                Register
+                            </a>
+                            <div class="text-center mt-3">
+                                <a href="index.html" tabindex="8">
+                                    Back
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="js/scripts.js"></script>
+
+        <script>
+            function check() {
+                var password = document.getElementById("password").value;
+                var username = document.getElementById("username").value;
+                var emailLink = document.getElementById("evaerp_access_link").value;
+                var str = 'true';
+                if (emailLink == '') {
+                    $(".evaerp_access_link").show();
+                    $(".evaerp_access_link_err").html('Access Link Cannot be empty.');
+                    str = 'false';
+                } else {
+                    $(".evaerp_access_link").hide();
+                    $(".evaerp_access_link_err").html('');
+                }
+                if (username == '') {
+                    $(".username").show();
+                    $(".username_err").html('Username cannot be empty.');
+                    str = 'false';
+                } else {
+                    $(".username").hide();
+                    $(".username_err").html('');
+                }
+                if (password == '') {
+                    $(".password").show();
+                    $(".password_err").html('Password cannot be empty.');
+                    str = 'false';
+                } else {
+                    $(".password").hide();
+                    $(".password_err").html('');
+                }
+
+                if (str == 'true') {
+                    const api_url =
+                        "https://my-dot-" + emailLink + ".appspot.com/slick_erp/loginStatusCheckServlet?password=" + password + "&companyId=5634472569470976&imeiNumber=869822038830607&actionTask=RegisterDevice&regId=null&applicationName=EVA Pedio&username=" + username;
+
+                    $.ajax({
+                        url: api_url,
+                        type: 'GET',
+                        success: function(responseText) {
+                            var resp = String(responseText.trim());
+                            if (resp == 'Success') {
+                                localStorage.setItem('access_link', emailLink);
+                                $(".success_message").show();
+                                $(".error_message").hide();
+                                $(".success_message").find('.msg').html('Registered Successfully');
+                                window.location = 'index.html';
+                            } else {
+                                $(".success_message").hide();
+                                $(".error_message").show();
+                                if (resp == '') {
+                                    $(".error_message").find('.msg').html('Invalid Password');
+                                } else if ($.trim(resp) == 'Invalid UserName.') {
+                                    $(".error_message").find('.msg').html(resp);
+                                } else {
+                                    $(".error_message").find('.msg').html('Invalid Access Link.');
+                                }
+                            }
+                        },
+                        error: function(data) {
+                            $(".success_message").hide();
+                            $(".error_message").show();
+                            $(".error_message").find('.msg').html('Invalid Access Link.');
+                        }
+                    });
+
+                }
+            }
+
+            function myFunction() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
+        <script>
+            document.getElementById("hideshow").innerHTML = 'Show';
+        </script>
+</body>
+
+</html>

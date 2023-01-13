@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard - EVA Pedio</title>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+    <link href="css/bootstrap-steps.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet" />
+    <style>
+        .datepicker td,
+        .datepicker th {
+            width: 2.0rem;
+            height: 2.0rem;
+            font-size: 0.8rem;
+        }
+        
+        .datepicker {
+            margin-bottom: 3rem;
+        }
+        
+        body {
+            min-height: 100vh;
+            background-color: #fafafa;
+        }
+        
+        .datepicker-dropdown {
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /*the container must be positioned relative:*/
+        
+        .autocomplete {
+            position: relative;
+        }
+        
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+        
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+        /*when hovering an item:*/
+        
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        /*when navigating through the items using the arrow keys:*/
+        
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-text mx-3"><img src="img/white-logo.png"></div>
+            </a>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active mt-3">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home </span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="multilevel-approval.html">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Multilevel Approval</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="create-customer.html">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Create Service</span></a>
+            </li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onClick="logout();">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span>Signout</span>
+                </a>
+            </li>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <!-- <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div> -->
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+                    <h6 style="margin: 25px;font-size:16px"><b>Customer Service Dashboard</b></h6>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown show bd1">
+                            <a class="nav-link dropdown-toggle" href="dashboard.html">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control eva_date" id="c_from_date" placeholder="DD/MM/YYYY" data-date-format="dd/mm/yyyy" autocomplete="off" value="">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="c_customer_name" placeholder="Customer Name">
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="font-size:12px !important" onClick="get_plan_data();">Plan</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" style="font-size:12px !important" onClick="get_scheduled_data();">Schedule</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false" style="font-size:12px !important" onClick="get_inprocess_data();">InProcess</a>
+                                <a class="nav-item nav-link" id="nav-completed-tab" data-toggle="tab" href="#nav-complete" role="tab" aria-controls="nav-contact" aria-selected="false" style="font-size:12px !important" onClick="get_completed_data();">Completed</a>
+                                <a class="nav-item nav-link" id="nav-search-tab" data-toggle="tab" href="#nav-search" onClick="show_search_form();" role="tab" aria-controls="nav-contact" aria-selected="false" style="font-size:12px !important"><i class="fa fa-bars" aria-hidden="true"></i></a>
+                            </div>
+                        </nav>
+                        <div class="tab-content maindivv" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                <div class="row mt-10 plan_div"></div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <div class="row mt-10 scheduled_div"></div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="row mt-10 inprocessed_div"></div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-complete" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="row mt-10 completed_div"></div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-search" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                <div class="alert alert-danger error_message" role="alert" style="display:none;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                    <span class="msg"></span>
+                                </div>
+                                <div class="row mt-10 nav_search_div">
+                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="background-color:#c6e2ec">
+                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span class="red">*</span> Date</a>
+                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" onclick="get_branch_data();" role="tab" aria-controls="v-pills-profile" aria-selected="false">Branch</a>
+                                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" onclick="get_customer_data();" role="tab" aria-controls="v-pills-messages" aria-selected="false">Customer</a>
+                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" onclick="get_technician_data();" role="tab" aria-controls="v-pills-settings" aria-selected="false">Technician</a>
+                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-status" onclick="get_status_data();" role="tab" aria-controls="v-pills-settings" aria-selected="false">Status</a>
+                                    </div>
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active offset-1" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="from_date">From Date :</label>
+                                                    <input type="text" class="form-control eva_date" id="s_from_date" placeholder="From Date" data-date-format="dd/mm/yyyy" autocomplete="off" value="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="to_date">To Date :</label>
+                                                    <input type="text" class="form-control eva_date" id="s_to_date" placeholder="To Date" data-date-format="dd/mm/yyyy" autocomplete="off" value="">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="tab-pane fade offset-1" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                            <nav class="navbar-light">
+                                                <form class="form-inline">
+                                                    <input class="form-control mr-sm-2" type="search" id="branch_search" placeholder="Search" aria-label="Search here" style="width: 80%;margin-right: 8px;">
+                                                    <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="width: 40px;padding: 7px 6px 5px;border-radius: 4px;"><i class="fa fa-search" aria-hidden="true"></i></button>-->
+                                                </form>
+                                            </nav>
+                                            <div class="branch_data">
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade offset-1" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                            <nav class="navbar-light">
+                                                <form class="form-inline">
+                                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" id="customer_search" aria-label="Search here" style="width: 80%;margin-right: 8px;">
+                                                </form>
+                                            </nav>
+                                            <div class="customer_data"></div>
+                                        </div>
+                                        <div class="tab-pane fade offset-1" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                            <nav class="navbar-light">
+                                                <form class="form-inline">
+                                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" id="tech_search" aria-label="Search here" style="width: 80%;margin-right: 8px;">
+                                                </form>
+                                            </nav>
+                                            <div class="tech_data"></div>
+                                        </div>
+                                        <div class="tab-pane fade offset-1" id="v-pills-status" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                            <nav class="navbar-light">
+                                                <form class="form-inline">
+                                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" id="status_search" aria-label="Search here" style="width: 80%;margin-right: 8px;">
+                                                </form>
+                                            </nav>
+                                            <div class="status_data"></div>
+                                        </div>
+                                        <button type="button" onclick="show_search_data();" class="btn btn-info offset-6">Apply</button>
+                                    </div>
+                                </div>
+                                <div class="search_result" style="display:none;">
+                                    <div class="row mt-12">
+                                        <div class="col-10 mt-10">
+                                            <div class="form-row">
+                                                <div class="col-5">
+                                                    <label class="info-color"><b>Date</b></label>
+                                                </div>
+                                                <div class="col">
+                                                    <label class="service_date_div">-</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row search_result_div"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="map" style="display:none;"></div>
+                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <div class="modal fade" id="planmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center loadingg" style="margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display:none !important;
+    transform: translate(-50%, -50%);">
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTUJGffS7YMGp2LJwq01YGnTD4OOF9i5c&callback=initMap&libraries=&v=weekly" defer></script>-->
+    <!-- Custom scripts for all pages-->
+    <script src="js/scripts.js"></script>
+    <script src="js/select2.full.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script>
+        var name = sessionStorage.getItem("json");
+        var obj = $.parseJSON(name);
+        var branchList = new Array();
+        var customerList = new Array();
+        var customerIList = new Array();
+        var customerCell = new Array();
+        var technicianNameList = new Array();
+        var statusList = new Array();
+        $(document).ready(function() {
+            //$('select').select2();
+            GFG_Fun();
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            $("#c_from_date").val(dd + '/' + mm + '/' + yyyy);
+            $('#c_from_date').datepicker().on('changeDate', function(e) {
+                $(this).datepicker('hide');
+            });
+            $('#s_from_date').datepicker().on('changeDate', function(e) {
+                $(this).datepicker('hide');
+            });;
+            $('#s_to_date').datepicker().on('changeDate', function(e) {
+                $(this).datepicker('hide');
+            });;
+
+            sessionStorage.removeItem('ss_from_date');
+            sessionStorage.removeItem('ss_service_id');
+            $("#c_from_date").change(function() {
+                var from_date_arr = ($("#c_from_date").val()).split('/');
+                var today1 = new Date(from_date_arr[2], from_date_arr[1] - 1, from_date_arr[0], 0, 0, 0, 0);
+                var today2 = today1.AddDays(1);
+                var dd3 = today2.getDate();
+                var mm2 = today2.getMonth() + 1;
+                var yyyy2 = today2.getFullYear();
+
+                if (dd3 < 10) {
+                    dd3 = '0' + dd3;
+                }
+
+                if (mm2 < 10) {
+                    mm2 = '0' + mm2;
+                }
+                from_date = $("#c_from_date").val();
+                to_date = dd3 + '/' + mm2 + '/' + yyyy2;
+                if ($("#nav-home").hasClass('active')) {
+                    get_plan_data();
+                } else if ($("#nav-profile").hasClass('active')) {
+                    get_scheduled_data();
+                } else if ($("#nav-contact").hasClass('active')) {
+                    get_inprocess_data();
+                } else if ($("#nav-complete").hasClass('active')) {
+                    get_completed_data();
+                }
+            });
+            $("#c_customer_name").keyup(function() {
+                if ($("#nav-home").hasClass('active')) {
+                    get_plan_data($(this).val().toLowerCase());
+                } else if ($("#nav-profile").hasClass('active')) {
+                    get_scheduled_data($(this).val().toLowerCase());
+                } else if ($("#nav-contact").hasClass('active')) {
+                    get_inprocess_data($(this).val().toLowerCase());
+                } else if ($("#nav-complete").hasClass('active')) {
+                    get_completed_data($(this).val().toLowerCase());
+                }
+            });
+            $("#c_from_date").trigger('change');
+        });
+
+
+        function show_search_form() {
+            $(".nav_search_div").show();
+            $(".search_result").hide();
+            var planned_html = '';
+            $(".plan_div").html(planned_html);
+            $(".scheduled_div").html(planned_html);
+            $(".inprocessed_div").html(planned_html);
+            $(".completed_div").html(planned_html);
+        }
+
+        function GFG_Fun() {
+            $("#customer_name").val(sessionStorage.getItem('fname'));
+            $("#customer_name").trigger('keyup');
+            sessionStorage.removeItem('fname');
+            const api_url =
+                "https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/configDataCreation?employeeGroup&employeeName=" + obj.employeeName + "&employeeId=" + obj.employeeId + "&applicationName=EVA Pedio";
+            $.get(api_url, function(responseText) {
+                if (responseText.length > 0) {
+                    var obj = $.parseJSON(responseText);
+                    $.each(obj, function(key, value) {
+                        if (key == 'branchList') {
+                            for (var i = 0; i < value.length; i++) {
+                                branchList.push(value[i].branchName);
+                            }
+                        }
+                        if (key == 'customerList') {
+                            for (var i = 0; i < value.length; i++) {
+                                customerList.push(value[i].customerName);
+                                customerIList.push(value[i].customerId);
+                                customerCell.push(value[i].customerCell);
+                            }
+                        }
+                        if (key == 'technicianNameList') {
+                            for (var i = 0; i < value.length; i++) {
+                                technicianNameList.push(value[i].technicianName);
+                            }
+                        }
+                    });
+                }
+            });
+            statusList.push('Scheduled', 'Completed', 'Cancelled', 'Started', 'Rescheduled', 'TCompleted', 'Reported', 'Suspended');
+        }
+        $("#branch_search").keyup(function() {
+            get_branch_data($(this).val().toLowerCase());
+        });
+        $("#customer_search").keyup(function() {
+            get_customer_data($(this).val().toLowerCase());
+        });
+        $("#tech_search").keyup(function() {
+            get_technician_data($(this).val().toLowerCase());
+        });
+        $("#status_search").keyup(function() {
+            get_status_data($(this).val().toLowerCase());
+        });
+        var cust_chk_arr = new Array();
+        var branch_chk_arr = new Array();
+        var tech_chk_arr = new Array();
+        var status_chk_arr = new Array();
+
+        function get_branch_data(branch_search = '') {
+            var html = '';
+            $('input:checkbox[id^="s_branch_"]:checked').each(function() {
+                if ($(this).val() != null && $(this).val() != '') {
+                    branch_chk_arr.push(branchList[$(this).val()]);
+                }
+            });
+            for (var i = 0; i < branchList.length; i++) {
+                if (branch_search == '' || (branch_search != '' && (branchList[i]).toLowerCase().includes(branch_search))) {
+                    var checked = '';
+                    if (branch_chk_arr.length > 0 && $.inArray(branchList[i], branch_chk_arr) != -1) {
+                        checked = ' checked="checked" ';
+                    }
+                    html += '<div class="input-group mb-2 mt-10">' +
+                        '<label class="form-control">' + branchList[i] + '</label>' +
+                        '<div class="input-group-prepend">' +
+                        '<div class="input-group-text">' +
+                        '<input type="checkbox" class="chk" id="s_branch_' + i + '" aria-label="Checkbox for following text input" value="' + i + '" ' + checked + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+            }
+            $(".branch_data").html(html);
+        }
+
+        function get_customer_data(customer_search = '') {
+            var html = '';
+            $('input:checkbox[id^="s_customer_"]:checked').each(function() {
+                if ($(this).val() != null && $(this).val() != '') {
+                    cust_chk_arr.push(customerList[$(this).val()]);
+                }
+            });
+            for (var i = 0; i < customerList.length; i++) {
+                if (customer_search == '' || (customer_search != '' && (customerList[i]).toLowerCase().includes(customer_search))) {
+                    var checked = '';
+                    if (cust_chk_arr.length > 0 && $.inArray(customerList[i], cust_chk_arr) != -1) {
+                        checked = ' checked="checked" ';
+                    }
+                    html += '<div class="input-group mb-2 mt-10">' +
+                        '<label class="form-control">' + customerList[i] + '</label>' +
+                        '<div class="input-group-prepend">' +
+                        '<div class="input-group-text">' +
+                        '<input type="checkbox" class="chk" id="s_customer_' + i + '" aria-label="Checkbox for following text input" value="' + i + '" ' + checked + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+            }
+            $(".customer_data").html(html);
+        }
+
+        function get_technician_data(tech_search = '') {
+            var html = '';
+            $('input:checkbox[id^="s_tech_"]:checked').each(function() {
+                if ($(this).val() != null && $(this).val() != '') {
+                    tech_chk_arr.push(technicianNameList[$(this).val()]);
+                }
+            });
+            for (var i = 0; i < technicianNameList.length; i++) {
+                if (tech_search == '' || (tech_search != '' && (technicianNameList[i]).toLowerCase().includes(tech_search))) {
+                    var checked = '';
+                    if (tech_chk_arr.length > 0 && $.inArray(technicianNameList[i], tech_chk_arr) != -1) {
+                        checked = ' checked="checked" ';
+                    }
+                    html += '<div class="input-group mb-2 mt-10">' +
+                        '<label class="form-control">' + technicianNameList[i] + '</label>' +
+                        '<div class="input-group-prepend">' +
+                        '<div class="input-group-text">' +
+                        '<input type="checkbox" class="chk" id="s_tech_' + i + '" aria-label="Checkbox for following text input" value="' + i + '" ' + checked + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+            }
+            $(".tech_data").html(html);
+        }
+
+        function get_status_data(status_search = '') {
+            var html = '';
+            $('input:checkbox[id^="s_status_"]:checked').each(function() {
+                if ($(this).val() != null && $(this).val() != '') {
+                    status_chk_arr.push(statusList[$(this).val()]);
+                }
+            });
+            for (var i = 0; i < statusList.length; i++) {
+                if (status_search == '' || (status_search != '' && (statusList[i]).toLowerCase().includes(status_search))) {
+                    var checked = '';
+                    if (status_chk_arr.length > 0 && $.inArray(statusList[i], status_chk_arr) != -1) {
+                        checked = ' checked="checked" ';
+                    }
+                    html += '<div class="input-group mb-2 mt-10">' +
+                        '<label class="form-control">' + statusList[i] + '</label>' +
+                        '<div class="input-group-prepend">' +
+                        '<div class="input-group-text">' +
+                        '<input type="checkbox" class="chk" id="s_status_' + i + '" aria-label="Checkbox for following text input" value="' + i + '" ' + checked + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+            }
+            $(".status_data").html(html);
+        }
+
+        function show_search_data() {
+            $(".btn").prop('disabled', true);
+            if ($("#s_from_date").val() == '' && $("#s_to_date").val() == '') {
+                $(".btn").removeAttr('disabled');
+                $(".error_message").show();
+                $(".error_message").find('.msg').html('Please select from & to date.');
+            } else {
+                $(".maindivv").hide();
+                $(".loadingg").show();
+                var to_date_arr = ($("#s_to_date").val()).split('/');
+                var days = 1;
+                var t_date = new Date(to_date_arr[2], to_date_arr[1] - 1, to_date_arr[0], 0, 0, 0, 0);
+                var newtDate = t_date.AddDays(days);
+
+                var dd3 = newtDate.getDate();
+                var mm3 = newtDate.getMonth() + 1;
+                var yyyy3 = newtDate.getFullYear();
+
+                if (dd3 < 10) {
+                    dd3 = '0' + dd3;
+                }
+
+                if (mm3 < 10) {
+                    mm3 = '0' + mm3;
+                }
+                var s_from_date = $("#s_from_date").val();
+                var s_to_date = dd3 + '/' + mm3 + '/' + yyyy3;
+                var ss_to_date = $("#s_to_date").val();
+                var s_branch_arr1 = [];
+                var s_branch_arr = {};
+                var s_customer_arr = [];
+                var s_tech_arr1 = [];
+                var s_tech_arr = {};
+                var s_status_arr1 = [];
+                var s_status_arr = {};
+                var i = 1;
+                $('input:checkbox[id^="s_branch_"]:checked').each(function() {
+                    if ($(this).val() >= 0) {
+                        s_branch_arr[i] = branchList[$(this).val()];
+                        $(this).prop('checked', false);
+                        i++;
+                    }
+                });
+
+                if (Object.keys(s_branch_arr).length > 0) {
+                    s_branch_arr1.push(s_branch_arr);
+                }
+                $('input:checkbox[id^="s_customer_"]:checked').each(function() {
+                    if ($(this).val() >= 0) {
+                        var str1 = {
+                            "id": customerIList[$(this).val()],
+                            "name": customerList[$(this).val()],
+                            "cell": customerCell[$(this).val()]
+                        };
+                        $(this).prop('checked', false);
+                        s_customer_arr.push(str1);
+                    }
+                });
+                var i = 1;
+                $('input:checkbox[id^="s_tech_"]:checked').each(function() {
+                    if ($(this).val() >= 0) {
+                        s_tech_arr[i] = technicianNameList[$(this).val()];
+                        $(this).prop('checked', false);
+                        i++;
+                    }
+                });
+                if (Object.keys(s_tech_arr).length > 0) {
+                    s_tech_arr1.push(s_tech_arr);
+                }
+                var i = 1;
+                $('input:checkbox[id^="s_status_"]:checked').each(function() {
+                    if ($(this).val() >= 0) {
+                        s_status_arr[i] = statusList[$(this).val()];
+                        $(this).prop('checked', false);
+                        i++;
+                    }
+                });
+                if (Object.keys(s_status_arr).length > 0) {
+                    s_status_arr1.push(s_status_arr);
+                }
+                cust_chk_arr = new Array();
+                branch_chk_arr = new Array();
+                tech_chk_arr = new Array();
+                status_chk_arr = new Array();
+                $("#s_from_date").val('');
+                $("#s_to_date").val('');
+                jsonObj = [];
+                item = {};
+                item["customer"] = s_customer_arr;
+                item["technician"] = s_tech_arr1;
+                item["status"] = s_status_arr1;
+                item["branch"] = s_branch_arr1;
+                item["fromDate"] = s_from_date;
+                item["toDate"] = s_to_date;
+                jsonObj.push(item);
+                jsonObj = jsonObj[0];
+                jsonData = JSON.stringify(jsonObj);
+                //console.log(jsonData);
+                var html = '';
+                $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/fetchServiceDashboardData?data=" + jsonData, function(responseText) {
+                    if (responseText != 'No Data Found.') {
+                        var json = JSON.parse(responseText);
+                        console.log(json);
+                        for (i = 0; i < Object.keys(json).length; i++) {
+                            var start_time = '';
+                            var start_loc = '';
+                            var end_loc = '';
+                            var km = 0;
+                            var comp_time = '';
+                            var repo_time = '';
+                            var scircle_num = '2';
+                            var rcircle_num = '3';
+                            var ccircle_num = '4';
+                            var km_str = '';
+                            if (json[i].trackingDetais.length > 0) {
+                                for (var t = 0; t < json[i].trackingDetais.length; t++) {
+                                    if (json[i].trackingDetais[t].status == 'Started') {
+                                        start_time = json[i].trackingDetais[t].time;
+                                        start_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                        if (start_loc_arr.length > 2) {
+                                            start_loc = start_loc_arr[2];
+                                        }
+                                        km = json[i].trackingDetais[t].km;
+                                    }
+                                    if (json[i].trackingDetais[t].status == 'Reported') {
+                                        repo_time = json[i].trackingDetais[t].time;
+                                        end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                        if (end_loc_arr.length > 2) {
+                                            end_loc = end_loc_arr[2];
+                                        }
+                                        km = json[i].trackingDetais[t].km;
+                                    }
+                                    if (json[i].trackingDetais[t].status == 'Completed' || json[i].trackingDetais[t].status == 'TCompleted') {
+                                        scircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                                        rcircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                                        ccircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                                        comp_time = json[i].trackingDetais[t].time;
+                                        end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                        if (end_loc_arr.length > 2) {
+                                            end_loc = end_loc_arr[2];
+                                        }
+                                        if (json[i].trackingDetais[t].status == 'Completed') {
+                                            km = json[i].trackingDetais[t].km;
+                                        }
+                                        km_str = '1';
+                                    }
+                                }
+                            }
+                            var service_address_lat_long = get_lat_long(json[i].serviceAddress);
+                            var action_div = '';
+                            var clickevent = '';
+                            var a1 = '';
+                            var a2 = '';
+                            if (json[i].status == "Scheduled" || json[i].status == "Rescheduled") {
+                                action_div += '<div class="dropdown">' +
+                                    '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                    '<img src="img/menu.png">' +
+                                    '</button>' +
+                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'plan\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action plan_list">Plan</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'technician\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action tech_list">Assign Technician</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'suspend_service\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action suspend_list">Suspend Service</a>';
+                                if (json[i].scheduleStatus == false) {
+                                    action_div +=
+                                        '<a href="javascript:void(0);" onClick="open_form(\'scheduled_service\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action scheduled_list">Schedule Service</a>';
+                                } else {
+                                    action_div += '<a href="javascript:void(0);" onClick="open_form1(\'rescheduled_service\',\'' + i + '\',\'Scheduled\');" class="list-group-item list-group-item-action rescheduled_list">Reschedule Service</a>';
+                                }
+                                action_div += '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                                    '</div>' +
+                                    '</div>';
+                            } else if (json[i].status == 'Cancelled') {
+                                action_div += '<div class="dropdown">' +
+                                    '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                    '<img src="img/menu.png">' +
+                                    '</button>' +
+                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'plan\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action plan_list">Plan</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'technician\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action tech_list">Assign Technician</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'suspend_service\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action suspend_list">Suspend Service</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'scheduled_service\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action scheduled_list">Schedule Service</a>' +
+                                    '<a href="javascript:void(0);" onClick="submit_resume_service(\'resume_service\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action resume_list">Resume Service</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                                    '</div>' +
+                                    '</div>';
+                            } else if (json[i].scheduleStatus == true && json[i].status == 'Started') {
+                                action_div += '<div class="dropdown">' +
+                                    '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                    '<img src="img/menu.png">' +
+                                    '</button>' +
+                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'suspend_service\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action suspend_list">Suspend Service</a>' +
+                                    '<a href="javascript:void(0);" onClick="submit_resume_service(\'resume_service\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action resume_list">Resume Service</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                                    '</div>' +
+                                    '</div>';
+                            } else if (json[i].status == 'Reported') {
+                                action_div += '<div class="dropdown">' +
+                                    '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                    '<img src="img/menu.png">' +
+                                    '</button>' +
+                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                                    '</div>' +
+                                    '</div>';
+                            } else if (json[i].status == 'Suspended') {
+                                action_div += '<div class="dropdown">' +
+                                    '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                                    '<img src="img/menu.png">' +
+                                    '</button>' +
+                                    '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                                    '<a href="javascript:void(0);" onClick="submit_resume_service(\'resume_service\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action resume_list">Resume Service</a>' +
+                                    '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                                    '</div>' +
+                                    '</div>';
+                            }
+                            if (json[i].status == 'Completed' || json[i].status == 'TCompleted') {
+                                clickevent = 'onclick="show_service_details(\'' + i + '\');"';
+                            }
+                            html += '<div class="col-xl-4 col-md-6 mb-4" ' + clickevent + '>' +
+                                '<div class="card border-left-info shadow h-100">' +
+                                '<div class="card-body" style="padding-bottom: 0px;">' +
+                                '<div class="row no-gutters">' +
+                                '<div class="col-10">' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Customer</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label>' + json[i].customerName + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Date</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label class="service_date_' + i + '">' + json[i].serviceDate + '</label> ' +
+                                '<label class="service_time_' + i + '">' + json[i].serviceTime + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Name</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label>' + json[i].productName + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Status</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label>' + json[i].status + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Service Id</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label class="service_id_' + i + '">' + json[i].serviceId + '</label>' +
+                                '<input type="hidden" class="team_' + i + '" value="' + (json[i].team == null ? '' : json[i].team) + '">' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Technician</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label class="tech_' + i + '">' + json[i].serviceEngineer + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Contract ID</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label>' + json[i].contractId + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="form-row">' +
+                                '<div class="col-5">' +
+                                '<label>Branch</label>' +
+                                '</div>' +
+                                '<div class="col">' +
+                                '<label>' + json[i].branch + '</label>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="col-2">' +
+                                '<a href="tel:+' + json[i].customerMobNo + '"><i class="fa fa-phone fa-4x icon-phone mt-10" aria-hidden="true"></i></a>' +
+                                '<a href="http://maps.google.com/maps?f=d&daddr=' + service_address_lat_long + '&dirflg=d&layer=t"><i class="fa fa-location-arrow fa-4x icon-map mt-10" aria-hidden="true"></i></a>' +
+                                action_div +
+                                '</div>' +
+                                '<div class="row mb-3 scroll">';
+                            if (km_str == '1') {
+                                html += '<label class="txt_blue">' + start_loc + ' ' + (km >= 0 ? km.toFixed(2) : 0.0) + ' km ' + end_loc + '</label>';
+                            }
+                            html += '<label class="txt_blue"></label>' +
+                                '<ul class="steps">' +
+                                '<li class="step step-success">' +
+                                '<div class="step-content">' +
+                                '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                                '<span class="step-text">Scheduled</span>' +
+                                '<span class="step-text">' + json[i].serviceTime + '</span>' +
+                                '</div>' +
+                                '</li>' +
+                                '<li class="step ' + (start_time == '' ? '' : 'step-success') + '">' +
+                                '<div class="step-content">' +
+                                '<span class="step-circle">' + scircle_num + '</span>' +
+                                '<span class="step-text">Started</span>' +
+                                '<span class="step-text">' + start_time + '</span>' +
+                                '</div>' +
+                                '</li>' +
+                                '<li class="step ' + (repo_time == '' ? '' : 'step-success') + '">' +
+                                '<div class="step-content">' +
+                                '<span class="step-circle">' + rcircle_num + '</span>' +
+                                '<span class="step-text">Reported</span>' +
+                                '<span class="step-text">' + repo_time + '</span>' +
+                                '</div>' +
+                                '</li>' +
+                                '<li class="step ' + (comp_time == '' ? '' : 'step-success') + '">' +
+                                '<div class="step-content">' +
+                                '<span class="step-circle">' + ccircle_num + '</span>' +
+                                '<span class="step-text">Completed</span>' +
+                                '<span class="step-text">' + ((json[i].status == 'TCompleted') ? '' : comp_time) + '</span>' +
+                                '</div>' +
+                                '</li>' +
+                                '</ul>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        }
+                        $(".btn").removeAttr('disabled');
+                        $(".error_message").hide();
+                        $(".error_message").find('.msg').html('');
+                        $(".nav_search_div").hide();
+                        $(".search_result").show();
+                        $(".search_result_div").html(html);
+                        $(".service_date_div").html(s_from_date + '-' + ss_to_date);
+                    } else {
+                        $(".btn").removeAttr('disabled');
+                        $(".nav_search_div").hide();
+                        $(".search_result").show();
+                        $(".search_result_div").html('<div class="alert alert-danger error_message" role="alert" style="display:none;"><i class="fa fa-exclamation-triangle" aria-hidden="true"> </i><span class="msg">' + responseText + '</span></div>');
+                        $(".service_date_div").html(s_from_date + '-' + ss_to_date);
+                    }
+
+                });
+                $('.spinner-grow').css({
+                    'display': 'none'
+                });
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            }
+        }
+
+        function get_plan_data(cname = '') {
+            $(".maindivv").hide();
+            $(".loadingg").show();
+            $(".nav_search_div").show();
+            $(".search_result").hide();
+            var planned_html = '';
+            $(".plan_div").html(planned_html);
+            $(".scheduled_div").html(planned_html);
+            $(".inprocessed_div").html(planned_html);
+            $(".completed_div").html(planned_html);
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsOperations?fromDate=" + from_date + "&loadType=Customer%20Service&employeeName=" + obj.employeeName + "&toDate=" + to_date + "&status=UnPlanned&employeeGroup=" + obj.employeeGroup, function(responseText) {
+                var json = JSON.parse(responseText);
+                for (i = 0; i < Object.keys(json).length; i++) {
+                    var start_time = '';
+                    var start_loc = '';
+                    var end_loc = '';
+                    var km = 0;
+                    var comp_time = '';
+                    var repo_time = '';
+                    if (json[i].trackingDetais.length > 0) {
+                        for (var t = 0; t < json[i].trackingDetais.length; t++) {
+                            if (json[i].trackingDetais[t].status == 'Started') {
+                                start_time = json[i].trackingDetais[t].time;
+                                start_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                if (start_loc_arr.length > 2) {
+                                    start_loc = start_loc_arr[2];
+                                }
+                                km = json[i].trackingDetais[t].km;
+                            }
+                            if (json[i].trackingDetais[t].status == 'Reported') {
+                                repo_time = json[i].trackingDetais[t].time;
+                                end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                if (end_loc_arr.length > 2) {
+                                    end_loc = end_loc_arr[2];
+                                }
+                                km = json[i].trackingDetais[t].km;
+                            }
+                            if (json[i].trackingDetais[t].status == 'Completed' || json[i].trackingDetais[t].status == 'TCompleted') {
+                                comp_time = json[i].trackingDetais[t].time;
+                                end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                if (end_loc_arr.length > 2) {
+                                    end_loc = end_loc_arr[2];
+                                }
+                                km = json[i].trackingDetais[t].km;
+                            }
+                        }
+                    }
+                    if (cname == '' || (cname != '' && (json[i].customerName).toLowerCase().includes(cname))) {
+                        var service_address_lat_long = get_lat_long(json[i].serviceAddress);
+                        planned_html += '<div class="col-xl-4 col-md-6 mb-4">' +
+                            '<div class="card border-left-info shadow h-100">' +
+                            '<div class="card-body" style="padding-bottom: 0px;">' +
+                            '<div class="row no-gutters">' +
+                            '<div class="col-10">' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Customer</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].customerName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Date</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_date_' + i + '">' + json[i].serviceDate + '</label> ' +
+                            '<label class="service_time_' + i + '">' + json[i].serviceTime + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Name</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].productName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Status</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].status + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Service Id</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_id_' + i + '">' + json[i].serviceId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Technician</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="tech_' + i + '">' + json[i].serviceEngineer + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Contract ID</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].contractId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Branch</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].branch + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-2">' +
+                            '<a href="tel:+' + json[i].customerMobNo + '"><i class="fa fa-phone fa-4x icon-phone mt-10" aria-hidden="true"></i></a>' +
+                            '<a href="http://maps.google.com/maps?f=d&daddr=' + service_address_lat_long + '&dirflg=d&layer=t"><i class="fa fa-location-arrow fa-4x icon-map mt-10" aria-hidden="true"></i></a>' +
+                            '<div class="dropdown">' +
+                            '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                            '<img src="img/menu.png">' +
+                            '</button>' +
+                            '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'plan\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action plan_list">Plan</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'technician\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action tech_list">Assign Technician</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'suspend_service\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action suspend_list">Suspend Service</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'scheduled_service\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action scheduled_list">Schedule Service</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Plan\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row mb-3 scroll">' +
+                            '<label class="txt_blue"></label>' +
+                            '<ul class="steps">' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Scheduled</span>' +
+                            '<span class="step-text">' + json[i].serviceTime + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (start_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">2</span>' +
+                            '<span class="step-text">Started</span>' +
+                            '<span class="step-text">' + start_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (repo_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">3</span>' +
+                            '<span class="step-text">Reported</span>' +
+                            '<span class="step-text">' + repo_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (comp_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">4</span>' +
+                            '<span class="step-text">Completed</span>' +
+                            '<span class="step-text">' + comp_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                }
+                $(".plan_div").html(planned_html);
+                $('.spinner-grow').css({
+                    'display': 'none'
+                });
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            });
+        }
+
+        function get_scheduled_data(cname = '') {
+            $(".maindivv").hide();
+            $(".loadingg").show();
+            $(".nav_search_div").show();
+            $(".search_result").hide();
+            var scheduled_html = '';
+            $(".plan_div").html(scheduled_html);
+            $(".scheduled_div").html(scheduled_html);
+            $(".inprocessed_div").html(scheduled_html);
+            $(".completed_div").html(scheduled_html);
+            var cnt = 0;
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsOperations?fromDate=" + from_date + "&loadType=Customer%20Service&employeeName=" + obj.employeeName + "&toDate=" + to_date + "&status=Scheduled&employeeGroup=" + obj.employeeGroup, function(responseText) {
+                var json = JSON.parse(responseText);
+                for (var i = 0; i < Object.keys(json).length; i++) {
+                    cnt = i;
+                    var start_time = '';
+                    var start_loc = '';
+                    var end_loc = '';
+                    var km = 0;
+                    var comp_time = '';
+                    var repo_time = '';
+                    if (json[i].trackingDetais.length > 0) {
+                        for (var t = 0; t < json[i].trackingDetais.length; t++) {
+                            if (json[i].trackingDetais[t].status == 'Started') {
+                                start_time = json[i].trackingDetais[t].time;
+                                start_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                if (start_loc_arr.length > 2) {
+                                    start_loc = start_loc_arr[2];
+                                }
+                                km = json[i].trackingDetais[t].km;
+                            }
+                            if (json[i].trackingDetais[t].status == 'Reported') {
+                                repo_time = json[i].trackingDetais[t].time;
+                                end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                if (end_loc_arr.length > 2) {
+                                    end_loc = end_loc_arr[2];
+                                }
+                                km = json[i].trackingDetais[t].km;
+                            }
+                            if (json[i].trackingDetais[t].status == 'Completed' || json[i].trackingDetais[t].status == 'TCompleted') {
+                                comp_time = json[i].trackingDetais[t].time;
+                                end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                if (end_loc_arr.length > 2) {
+                                    end_loc = end_loc_arr[2];
+                                }
+                                km = json[i].trackingDetais[t].km;
+                            }
+                        }
+                    }
+                    var service_address_lat_long = get_lat_long(json[i].serviceAddress);
+                    if (cname == '' || (cname != '' && (json[i].customerName).toLowerCase().includes(cname))) {
+                        scheduled_html += '<div class="col-xl-4 col-md-6 mb-4">' +
+                            '<div class="card border-left-warning shadow h-100">' +
+                            '<div class="card-body" style="padding-bottom: 0px;">' +
+                            '<div class="row no-gutters">' +
+                            '<div class="col-10">' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Customer</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].customerName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Date</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_date_' + i + '">' + json[i].serviceDate + '</label> ' +
+                            '<label class="service_time_' + i + '">' + json[i].serviceTime + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Name</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].productName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Status</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].status + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Service Id</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_id_' + i + '">' + json[i].serviceId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Technician</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="tech_' + i + '">' + json[i].serviceEngineer + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Contract ID</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].contractId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Branch</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].branch + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-2">' +
+                            '<a href="tel:+' + json[i].customerMobNo + '"><i class="fa fa-phone fa-4x icon-phone mt-10" aria-hidden="true"></i></a>' +
+                            '<a href="http://maps.google.com/maps?f=d&daddr=' + service_address_lat_long + '&dirflg=d&layer=t"><i class="fa fa-location-arrow fa-4x icon-map mt-10" aria-hidden="true"></i></a>' +
+                            '<div class="dropdown">' +
+                            '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                            '<img src="img/menu.png">' +
+                            '</button>' +
+                            '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'plan\',\'' + i + '\',\'Scheduled\');" class="list-group-item list-group-item-action plan_list">Plan</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'technician\',\'' + i + '\',\'Scheduled\');" class="list-group-item list-group-item-action tech_list">Assign Technician</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'suspend_service\',\'' + i + '\',\'Scheduled\');" class="list-group-item list-group-item-action suspend_list">Suspend Service</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form1(\'rescheduled_service\',\'' + i + '\',\'Scheduled\');" class="list-group-item list-group-item-action rescheduled_list">Reschedule Service</a>' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Scheduled\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row mb-3 scroll">' +
+                            '<label class="txt_blue"></label>' +
+                            '<ul class="steps">' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Scheduled</span>' +
+                            '<span class="step-text">' + json[i].serviceTime + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (start_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">2</span>' +
+                            '<span class="step-text">Started</span>' +
+                            '<span class="step-text">' + start_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (repo_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">3</span>' +
+                            '<span class="step-text">Reported</span>' +
+                            '<span class="step-text">' + repo_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (comp_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">4</span>' +
+                            '<span class="step-text">Completed</span>' +
+                            '<span class="step-text">' + comp_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                }
+                $(".scheduled_div").html(scheduled_html);
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            });
+        }
+
+        function get_inprocess_data(cname = '') {
+            $(".maindivv").hide();
+            $(".loadingg").show();
+            $(".nav_search_div").show();
+            $(".search_result").hide();
+            var inprocessed_html = '';
+            $(".plan_div").html(inprocessed_html);
+            $(".scheduled_div").html(inprocessed_html);
+            $(".inprocessed_div").html(inprocessed_html);
+            $(".completed_div").html(inprocessed_html);
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsOperations?fromDate=" + from_date + "&loadType=Customer%20Service&employeeName=" + obj.employeeName + "&toDate=" + to_date + "&status=InProcess&employeeGroup=" + obj.employeeGroup, function(responseText) {
+                var json = JSON.parse(responseText);
+                //console.log(json);
+                for (i = 0; i < Object.keys(json).length; i++) {
+                    var service_address_lat_long = get_lat_long(json[i].serviceAddress);
+                    if (cname == '' || (cname != '' && (json[i].customerName).toLowerCase().includes(cname))) {
+                        var start_time = '';
+                        var start_loc = '';
+                        var end_loc = '';
+                        var km = 0;
+                        var comp_time = '';
+                        var repo_time = '';
+                        var scircle_num = '2';
+                        var rcircle_num = '3';
+                        var ccircle_num = '4';
+                        var km_str = '';
+                        if (json[i].status == 'Reported') {
+                            scircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                        }
+                        if (json[i].trackingDetais.length > 0) {
+                            for (var t = 0; t < json[i].trackingDetais.length; t++) {
+                                if (json[i].trackingDetais[t].status == 'Started') {
+                                    start_time = json[i].trackingDetais[t].time;
+                                    start_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                    if (start_loc_arr.length > 2) {
+                                        start_loc = start_loc_arr[2];
+                                    }
+                                    km = json[i].trackingDetais[t].km;
+                                }
+                                if (json[i].trackingDetais[t].status == 'Reported') {
+                                    repo_time = json[i].trackingDetais[t].time;
+                                    end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                    if (end_loc_arr.length > 2) {
+                                        end_loc = end_loc_arr[2];
+                                    }
+                                    km = json[i].trackingDetais[t].km;
+                                    km_str = '1';
+                                }
+                                if (json[i].trackingDetais[t].status == 'Completed' || json[i].trackingDetais[t].status == 'TCompleted') {
+                                    scircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                                    rcircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                                    ccircle_num = '<i class="fa fa-check" aria-hidden="true"></i>';
+                                    comp_time = json[i].trackingDetais[t].time;
+                                    end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                    if (end_loc_arr.length > 2) {
+                                        end_loc = end_loc_arr[2];
+                                    }
+                                    if (json[i].trackingDetais[t].status == 'Completed') {
+                                        km = json[i].trackingDetais[t].km;
+                                    }
+                                    km_str = '1';
+                                }
+                            }
+                        }
+                        inprocessed_html += '<div class="col-xl-4 col-md-6 mb-4">' +
+                            '<div class="card border-left-primary shadow h-100">' +
+                            '<div class="card-body" style="padding-bottom: 0px;">' +
+                            '<div class="row no-gutters">' +
+                            '<div class="col-10">' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Customer</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].customerName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Date</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_date_' + i + '">' + json[i].serviceDate + '</label> ' +
+                            '<label class="service_time_' + i + '">' + json[i].serviceTime + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Name</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].productName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Status</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].status + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Service Id</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_id_' + i + '">' + json[i].serviceId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Technician</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="tech_' + i + '">' + json[i].serviceEngineer + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Contract ID</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].contractId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Branch</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].branch + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-2">' +
+                            '<a href="tel:+' + json[i].customerMobNo + '"><i class="fa fa-phone fa-4x icon-phone mt-10" aria-hidden="true"></i></a>' +
+                            '<a href="http://maps.google.com/maps?f=d&daddr=' + service_address_lat_long + '&dirflg=d&layer=t"><i class="fa fa-location-arrow fa-4x icon-map mt-10" aria-hidden="true"></i></a>' +
+                            /*'<button type="button" class="btn btn-warning mt-10 icon-edit" onclick="open_modal(\'inprocess\',\'' + i + '\');"><img src="img/icon.png" style="width:78%"></button>' +*/
+                            '<div class="dropdown">' +
+                            '<button class="btn bb" type="button" id="dropdownMenuButton_' + i + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                            '<img src="img/menu.png">' +
+                            '</button>' +
+                            '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton_' + i + '">' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'cancel\',\'' + i + '\',\'Inprocess\');" class="list-group-item list-group-item-action cancel_list">Cancel Service</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="row mb-3 scroll">';
+                        if (km_str == '1') {
+                            inprocessed_html += '<label class="txt_blue">' + start_loc + ' ' + (km >= 0 ? km.toFixed(2) : 0.0) + ' km ' + end_loc + '</label>';
+                        }
+
+                        inprocessed_html += '<ul class="steps">' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Scheduled</span>' +
+                            '<span class="step-text">' + json[i].serviceTime + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (start_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">' + scircle_num + '</span>' +
+                            '<span class="step-text">Started</span>' +
+                            '<span class="step-text">' + start_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (repo_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">' + rcircle_num + '</span>' +
+                            '<span class="step-text">Reported</span>' +
+                            '<span class="step-text">' + repo_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step ' + (comp_time == '' ? '' : 'step-success') + '">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle">' + ccircle_num + '</span>' +
+                            '<span class="step-text">Completed</span>' +
+                            '<span class="step-text">' + ((json[i].status == 'TCompleted') ? '' : comp_time) + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+                    }
+                }
+                $(".inprocessed_div").html(inprocessed_html);
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            });
+        }
+
+        function get_completed_data(cname = '') {
+            $(".maindivv").hide();
+            $(".loadingg").show();
+            $(".nav_search_div").show();
+            $(".search_result").hide();
+            var completed_html = '';
+            $(".plan_div").html(completed_html);
+            $(".scheduled_div").html(completed_html);
+            $(".inprocessed_div").html(completed_html);
+            $(".completed_div").html(completed_html);
+            var cnt = 0;
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsOperations?fromDate=" + from_date + "&loadType=Customer%20Service&employeeName=" + obj.employeeName + "&toDate=" + to_date + "&status=Completed&employeeGroup=" + obj.employeeGroup, function(responseText) {
+                var json = JSON.parse(responseText);
+                //console.log(json);
+                for (i = 0; i < Object.keys(json).length; i++) {
+                    cnt = i;
+                    var service_address_lat_long = get_lat_long(json[i].serviceAddress);
+                    if (cname == '' || (cname != '' && (json[i].customerName).toLowerCase().includes(cname))) {
+                        var start_time = '';
+                        var start_loc = '';
+                        var end_loc = '';
+                        var km = 0;
+                        var comp_time = '';
+                        var repo_time = '';
+                        if (json[i].trackingDetais.length > 0) {
+                            for (var t = 0; t < json[i].trackingDetais.length; t++) {
+                                if (json[i].trackingDetais[t].status == 'Started') {
+                                    start_time = json[i].trackingDetais[t].time;
+                                    start_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                    if (start_loc_arr.length > 2) {
+                                        start_loc = start_loc_arr[2];
+                                    }
+                                    km = json[i].trackingDetais[t].km;
+                                }
+                                if (json[i].trackingDetais[t].status == 'Reported') {
+                                    repo_time = json[i].trackingDetais[t].time;
+                                    end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                    if (end_loc_arr.length > 2) {
+                                        end_loc = end_loc_arr[2];
+                                    }
+                                    km = json[i].trackingDetais[t].km;
+                                }
+                                if (json[i].trackingDetais[t].status == 'Completed' || json[i].trackingDetais[t].status == 'TCompleted') {
+                                    //comp_time = json[i].trackingDetais[t].time;
+                                    end_loc_arr = (json[i].trackingDetais[t].location).split(',');
+                                    if (end_loc_arr.length > 2) {
+                                        end_loc = end_loc_arr[2];
+                                    }
+                                    if (json[i].trackingDetais[t].status == 'Completed') {
+                                        comp_time = json[i].trackingDetais[t].time;
+                                        km = json[i].trackingDetais[t].km;
+                                    }
+                                }
+                            }
+                        }
+                        completed_html += '<a href="javascript:void(0);" onclick="show_service_details(\'' + i + '\');">' +
+                            '<div class="col-xl-4 col-md-6 mb-4">' +
+                            '<div class="card border-left-success shadow h-100">' +
+                            '<div class="card-body" style="padding-bottom: 0px;">' +
+                            '<div class="row no-gutters">' +
+                            '<div class="col-10">' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Customer</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].customerName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Date</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_date_' + i + '">' + json[i].serviceDate + '</label> ' +
+                            '<label class="service_time_' + i + '">' + json[i].serviceTime + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Name</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].productName + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Status</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].status + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Service Id</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="service_id_' + i + '">' + json[i].serviceId + '</label>' +
+                            '<input type="hidden" class="team_' + i + '" value="' + (json[i].team == null ? '' : json[i].team) + '">' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Technician</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label class="tech_' + i + '">' + json[i].serviceEngineer + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Contract ID</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].contractId + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="form-row">' +
+                            '<div class="col-5">' +
+                            '<label>Branch</label>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<label>' + json[i].branch + '</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col-2">' +
+                            '<a href="tel:+' + json[i].customerMobNo + '"><i class="fa fa-phone fa-4x icon-phone mt-10" aria-hidden="true"></i></a>' +
+                            '<a href="http://maps.google.com/maps?f=d&daddr=' + service_address_lat_long + '&dirflg=d&layer=t"><i class="fa fa-location-arrow fa-4x icon-map mt-10" aria-hidden="true"></i></a>' +
+                            '</div>' +
+                            '<div class="row mb-3 scroll">' +
+                            '<label class="txt_blue">' + start_loc + ' ' + (km >= 0 ? km.toFixed(1) : 0.0) + ' km ' + end_loc + '</label>' +
+                            '<ul class="steps">' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Scheduled</span>' +
+                            '<span class="step-text">' + json[i].serviceTime + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Started</span>' +
+                            '<span class="step-text">' + start_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Reported</span>' +
+                            '<span class="step-text">' + repo_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '<li class="step step-success">' +
+                            '<div class="step-content">' +
+                            '<span class="step-circle"><i class="fa fa-check" aria-hidden="true"></i></span>' +
+                            '<span class="step-text">Completed</span>' +
+                            '<span class="step-text">' + comp_time + '</span>' +
+                            '</div>' +
+                            '</li>' +
+                            '</ul>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div></a>';
+                    }
+                }
+                $(".completed_div").html(completed_html);
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            });
+        }
+
+        function show_service_details(cnt) {
+            var ss_from_date = $.trim($(".service_date_" + cnt).html());
+            var ss_service_id = $.trim($(".service_id_" + cnt).html());
+            var team = $.trim($(".team_" + cnt).val());
+            sessionStorage.setItem('ss_from_date', ss_from_date);
+            sessionStorage.setItem('ss_service_id', ss_service_id);
+            sessionStorage.setItem('ss_team', team);
+            window.location = 'service_details.html';
+        }
+
+        function submit_resume_service(process, cnt, tab) {
+            $(".btn").attr('disabled', true);
+            var service_doc_id = $.trim($(".service_id_" + cnt).html());
+            var confirm_res = confirm("Are you sure you want to resume service?");
+            if (confirm_res == true) {
+                var menu_name = 'Rescheduled';
+                var remark = '';
+                $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/markServiceStatusServlet?remark=" + remark + "&serviceId=" + service_doc_id + "&user=" + obj.employeeName + "&status=" + menu_name, function(responseText) {
+                    if ($.trim(responseText) == 'Status Updated Successfully.') {
+                        $(".success_message").show();
+                        $(".success_message").find('.msg').html(responseText);
+                        $("#planmodal").modal('hide');
+                        if (tab == 'Plan') {
+                            get_plan_data();
+                        } else if (tab == 'Scheduled') {
+                            get_scheduled_data();
+                        } else if (tab == 'Inprocess') {
+                            get_inprocess_data();
+                        }
+                    } else {
+                        $(".btn").attr('disabled', false);
+                        $(".error_message").show();
+                        $(".error_message").find('.msg').html($.trim(responseText));
+                    }
+                });
+            } else {
+                $(".btn").removeAttr('disabled');
+            }
+        }
+
+        function open_form(process, cnt, tab) {
+            $html = '';
+            $('.modal-header').html('');
+            today_date = new Date();
+            var today = $(".service_date_" + cnt).html();
+            var today_arr = today.split('/');
+            today = today_arr[0] + '/' + today_arr[1] + '/' + today_arr[2];
+            if ($(".service_time_" + cnt).html() != '' && $.trim($(".service_time_" + cnt).html()) != 'Flexible') {
+                var dt = $(".service_time_" + cnt).html();
+                if (dt.includes('AM')) {
+                    var t = 'AM';
+                } else if (dt.includes('PM')) {
+                    var t = 'PM';
+                } else {
+                    var t = 'AM';
+                }
+                var dt1 = dt.replace(t, '') + ' ' + t;
+                var today_time = convertTime12to24(dt1);
+            } else {
+                var current_hours = today_date.getHours();
+                var current_minutes = today_date.getMinutes();
+                var today_time = (current_hours.length < 2 && current_hours < 10 ? '0' + current_hours : current_hours) + ':' + (current_minutes < 10 || current_minutes.length < 2 ? '0' + current_minutes : current_minutes);
+            }
+
+            var tech_name = $(".tech_" + cnt).html();
+            if (process == 'plan' || process == 'scheduled_service' || process == 'rescheduled_service') {
+                var menu_name = (process == 'plan' ? 'Plan' : (process == 'rescheduled_service' ? 'Reschedule Service' : 'Schedule Service'));
+                var btn_name = (process == 'plan' ? 'Plan Service' : (process == 'rescheduled_service' ? 'Reschedule Service' : 'Schedule Service'));
+                $html += '<div class="modal-header">' +
+                    '<h5 class="modal-title">' + menu_name + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '</div>' +
+                    '<div class="modal-body">' +
+                    '<form>' +
+                    '<div class="alert alert-success success_message" role="alert" style="display:none;">' +
+                    '<i class="fa fa-check" aria-hidden="true"> </i>' +
+                    '<span class="msg"></span>' +
+                    '</div>' +
+                    '<div class="alert alert-danger error_message" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="msg"></span>' +
+                    '</div>' +
+                    '<input type="hidden" name="process" value="' + process + '">' +
+                    '<div class="form-group">' +
+                    '<label class="ft-14">Service Date <span class="red">*</span></label>' +
+                    '<input type="text" class="form-control eva_date" id="service_date" placeholder="DD/MM/YYYY" data-date-format="dd/mm/yyyy" autocomplete="off" tabindex="2" value="' + today + '" >' +
+                    '<div class="alert alert-danger service_date" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="service_date_err"></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                    '<label class="ft-14">Service Time <span class="red">*</span></label>' +
+                    '<input type="time" class="form-control" placeholder="" id="service_time" tabindex="3" value="' + today_time + '">' +
+                    '<div class="alert alert-danger service_time" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="service_time_err"></span>' +
+                    '</div>' +
+                    '</div>';
+                if (process == 'rescheduled_service') {
+                    $html += '<div class="form-group">' +
+                        '<label class="ft-14 mt-10">Specific Reason </label>' +
+                        '<select name="reason" id="reason" class="form-control" onChange="set_specific_reason();">' +
+                        '<option value="">Select</option>' +
+                        '<option value="1">Customer not availbale</option>' +
+                        '<option value="2">My remarks</option>' +
+                        '</select>' +
+                        '<input type="text" class="form-control mt-10" id="specific_reason" aria-describedby="specific_reason" placeholder="Specific Reason" autocomplete="off" tabindex="4">' +
+                        '<div class="alert alert-danger specific_reason" role="alert" style="display:none;">' +
+                        '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                        '<span class="specific_reason_err"></span>' +
+                        '</div>' +
+                        '</div>';
+                } else {
+                    $html += '<div class="form-group">' +
+                        '<label class="ft-14 mt-10">Technician Name <span class="red">*</span></label>' +
+                        /*'<input type="text" class="form-control" id="technician_name" aria-describedby="technician_name" placeholder="Technician Name" autocomplete="off" tabindex="4" value="' + tech_name + '">' +*/
+                        '<select id="technician_name" class="form-control"></select>' +
+                        '<div class="alert alert-danger technician_name" role="alert" style="display:none;">' +
+                        '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                        '<span class="technician_name_err"></span>' +
+                        '</div>' +
+                        '</div>';
+                }
+
+                $html += '</form>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                    '<button type="button" onClick="submit_form(\'' + process + '\',\'' + cnt + '\',\'' + tab + '\');" class="btn btn-success">' + btn_name + '</button>' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                    '</div>';
+            }
+            if (process == 'technician') {
+                $html += '<div class="modal-header">' +
+                    '<h5 class="modal-title">Assign Technician</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '</div>' +
+                    '<div class="modal-body">' +
+                    '<form>' +
+                    '<div class="alert alert-success success_message" role="alert" style="display:none;">' +
+                    '<i class="fa fa-check" aria-hidden="true"> </i>' +
+                    '<span class="msg"></span>' +
+                    '</div>' +
+                    '<div class="alert alert-danger error_message" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="msg"></span>' +
+                    '</div>' +
+                    '<input type="hidden" name="process" value="' + process + '">' +
+                    '<div class="form-group">' +
+                    '<label class="ft-14 mt-10">Technician Name <span class="red">*</span></label>' +
+                    /*'<input type="text" class="form-control" id="technician_name" aria-describedby="technician_name" placeholder="Technician Name" autocomplete="off" tabindex="4" value="' + tech_name + '">' +*/
+                    '<div><select id="technician_name" class="form-control"></select></div>' +
+                    '<div class="alert alert-danger technician_name" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="technician_name_err"></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</form>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                    '<button type="button" onClick="submit_form(\'' + process + '\',\'' + cnt + '\',\'' + tab + '\');" class="btn btn-success">Assign Technician</button>' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                    '</div>';
+            }
+            if (process == 'suspend_service' || process == 'cancel') {
+                var menu_name = (process == 'suspend_service' ? 'Suspend Service' : 'Cancel Service');
+                $html += '<div class="modal-header">' +
+                    '<h5 class="modal-title">' + menu_name + '</h5>' +
+                    '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                    '<span aria-hidden="true">&times;</span>' +
+                    '</button>' +
+                    '</div>' +
+                    '<div class="modal-body">' +
+                    '<form>' +
+                    '<div class="alert alert-success success_message" role="alert" style="display:none;">' +
+                    '<i class="fa fa-check" aria-hidden="true"> </i>' +
+                    '<span class="msg"></span>' +
+                    '</div>' +
+                    '<div class="alert alert-danger error_message" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="msg"></span>' +
+                    '</div>' +
+                    '<input type="hidden" name="process" value="' + process + '">' +
+                    '<div class="form-group">' +
+                    '<label class="ft-14 mt-10">Remark </label>' +
+                    '<textarea class="form-control" id="remark" aria-describedby="remark" placeholder="" autocomplete="off" tabindex="4"></textarea>' +
+                    '<div class="alert alert-danger remark" role="alert" style="display:none;">' +
+                    '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                    '<span class="remark_err"></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</form>' +
+                    '</div>' +
+                    '<div class="modal-footer">' +
+                    '<button type="button" onClick="submit_form(\'' + process + '\',\'' + cnt + '\',\'' + tab + '\');" class="btn btn-success">' + menu_name + '</button>' +
+                    '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                    '</div>';
+            }
+            $("#planmodal").find('.modal-content').html($html);
+            var technicianNameList = new Array();
+            if (process == 'plan' || process == 'technician' || process == 'scheduled_service') {
+                const api_url =
+                    "https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/configDataCreation?employeeGroup&employeeName=" + obj.employeeName + "&employeeId=" + obj.employeeId + "&applicationName=EVA Pedio";
+                $.get(api_url, function(responseText) {
+                    if (responseText.length > 0) {
+                        var obj = $.parseJSON(responseText);
+                        //console.log(obj);
+                        $.each(obj, function(key, value) {
+                            if (key == 'technicianNameList') {
+                                for (var i = 0; i < value.length; i++) {
+                                    technicianNameList.push(value[i].technicianName);
+                                }
+                                $("#technician_name").html('');
+                                var tech_html = '<option value="">Select Technician</option>';
+                                for (var i = 0; i < technicianNameList.length; i++) {
+                                    tech_html += '<option value="' + i + '">' + technicianNameList[i] + '</option>';
+                                }
+                                $("#technician_name").html(tech_html);
+                            }
+                        });
+                        //console.log(tech_html);
+                        $("#technician_name").val(technicianNameList.indexOf(tech_name));
+                        $("#planmodal").modal('show');
+                    }
+                });
+                $("#service_date").datepicker()
+                    .on('changeDate', function(e) {
+                        $(this).datepicker('hide');
+                    });
+                $('select').select2();
+            } else {
+                $("#planmodal").modal('show');
+            }
+        }
+
+
+        function open_form1(process, cnt, tab) {
+            $html = '';
+            $('.modal-header').html('');
+            today_date = new Date();
+            var today = $(".service_date_" + cnt).html();
+            var today_arr = today.split('/');
+            today = today_arr[0] + '/' + today_arr[1] + '/' + today_arr[2];
+            if ($(".service_time_" + cnt).html() != '' && $.trim($(".service_time_" + cnt).html()) != 'Flexible') {
+                var dt = $(".service_time_" + cnt).html();
+                if (dt.includes('AM')) {
+                    var t = 'AM';
+                } else if (dt.includes('PM')) {
+                    var t = 'PM';
+                } else {
+                    var t = 'AM';
+                }
+                var dt1 = dt.replace(t, '') + ' ' + t;
+                var today_time = convertTime12to24(dt1);
+            } else {
+                var current_hours = today_date.getHours();
+                var current_minutes = today_date.getMinutes();
+                var today_time = (current_hours.length < 2 && current_hours < 10 ? '0' + current_hours : current_hours) + ':' + (current_minutes < 10 || current_minutes.length < 2 ? '0' + current_minutes : current_minutes);
+            }
+
+            var tech_name = $(".tech_" + cnt).html();
+            var menu_name = 'Reschedule Service';
+            var btn_name = 'Reschedule Service';
+            $html += '<div class="modal-header">' +
+                '<h5 class="modal-title">' + menu_name + '</h5>' +
+                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                '<form>' +
+                '<div class="alert alert-success success_message" role="alert" style="display:none;">' +
+                '<i class="fa fa-check" aria-hidden="true"> </i>' +
+                '<span class="msg"></span>' +
+                '</div>' +
+                '<div class="alert alert-danger error_message" role="alert" style="display:none;">' +
+                '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                '<span class="msg"></span>' +
+                '</div>' +
+                '<input type="hidden" name="process" value="' + process + '">' +
+                '<div class="form-group">' +
+                '<label class="ft-14">Service Date <span class="red">*</span></label>' +
+                '<input type="text" class="form-control eva_date" id="service_date" placeholder="DD/MM/YYYY" data-date-format="dd/mm/yyyy" autocomplete="off" tabindex="2" value="' + today + '" >' +
+                '<div class="alert alert-danger service_date" role="alert" style="display:none;">' +
+                '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                '<span class="service_date_err"></span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label class="ft-14">Service Time <span class="red">*</span></label>' +
+                '<input type="time" class="form-control" placeholder="" id="service_time" tabindex="3" value="' + today_time + '">' +
+                '<div class="alert alert-danger service_time" role="alert" style="display:none;">' +
+                '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                '<span class="service_time_err"></span>' +
+                '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label class="ft-14 mt-10">Specific Reason </label>' +
+                '<select name="reason" id="reason" class="form-control" onChange="set_specific_reason();">' +
+                '<option value="">Select</option>' +
+                '<option value="1">Customer not availbale</option>' +
+                '<option value="2">My remarks</option>' +
+                '</select>' +
+                '<input type="text" class="form-control mt-10" id="specific_reason" aria-describedby="specific_reason" placeholder="Specific Reason" autocomplete="off" tabindex="4">' +
+                '<div class="alert alert-danger specific_reason" role="alert" style="display:none;">' +
+                '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                '<span class="specific_reason_err"></span>' +
+                '</div>' +
+                '</div>' +
+                '</form>' +
+                '</div>' +
+                '<div class="modal-footer">' +
+                '<button type="button" onClick="submit_form(\'' + process + '\',\'' + cnt + '\',\'' + tab + '\');" class="btn btn-success">' + btn_name + '</button>' +
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                '</div>';
+            $("#planmodal").find('.modal-content').html($html);
+            $("#planmodal").modal('show');
+            $("#service_date").datepicker()
+                .on('changeDate', function(e) {
+                    $(this).datepicker('hide');
+                });
+        }
+
+        function submit_form(process, cnt, tab) {
+            $(".btn").attr('disabled', true);
+            result = validate_form_data(process);
+            if (result == 'true') {
+                jsonObj = [];
+                item = {};
+                var service_doc_id = $.trim($(".service_id_" + cnt).html());
+                if (process == 'plan' || process == 'scheduled_service' || process == 'technician') {
+                    if (process == 'plan' || process == 'scheduled_service') {
+
+                        item["serviceId"] = service_doc_id;
+                        item["serviceDate"] = $("#service_date").val();
+                        item["serviceTime"] = $("#service_time").val();
+                        item["technicianName"] = $("#technician_name option:selected").text();
+                        item["userName"] = obj.employeeName;
+                        var menu_name = (process == 'plan' ? 'Plan' : (process == 'scheduled_service' ? 'Schedule' : 'Reschedule'));
+                        var msg_str = (process == 'plan' ? 'Planed' : (process == 'scheduled_service' ? 'Scheduled' : 'Rescheduled'));
+                    } else if (process == 'technician') {
+                        item["technicianName"] = $("#technician_name option:selected").text();
+                        item["serviceDescription"] = '';
+                        var menu_name = 'Assign Technician';
+                        var msg_str = 'Technician Assigned';
+                    }
+                    jsonObj.push(item);
+                    jsonObj = jsonObj[0];
+                    jsonData = JSON.stringify(jsonObj);
+                    $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsMenuUpdate?menuName=" + menu_name + "&screenName=Customer Service&data=" + jsonData + "&docId=" + service_doc_id, function(responseText) {
+                        console.log($.trim(responseText));
+                        if ($.trim(responseText) == 'Successfull') {
+                            $(".success_message").show();
+                            $(".success_message").find('.msg').html(msg_str + ' successfully.');
+                            $("#planmodal").modal('hide');
+                            if (tab == 'Plan') {
+                                get_plan_data();
+                            } else if (tab == 'Scheduled') {
+                                get_scheduled_data();
+                            } else if (tab == 'Inprocess') {
+                                get_inprocess_data();
+                            }
+                        } else {
+                            $(".btn").removeAttr('disabled');
+                            $(".error_message").show();
+                            $(".error_message").find('.msg').html($.trim(responseText));
+                        }
+                    });
+                } else if (process == 'rescheduled_service') {
+                    var menu_name = 'Rescheduled';
+                    var remark = $("#specific_reason").val();
+                    var remark = $("#specific_reason").val();
+                    var service_time = $("#service_time").val();
+                    var tech_name = $('.tech_' + cnt).html();
+                    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
+                    ];
+
+                    var service_date_array = $("#service_date").val().split('/');
+                    var rescheduleDate = service_date_array[0] + ' ' + monthNames[service_date_array[1] - 1] + ' ' + service_date_array[2];
+                    $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/rescheduleServiceDataUpload?rescheduleReason=" + remark + "&companyId=5634472569470976&syncFlag=false&technicianName=" + tech_name + "&lon=75.89665683&rescheduleDate=" + rescheduleDate + "&serviceId=" + service_doc_id + "&rescheduleTime=" + service_time + "&lat=19.83745489", function(responseText) {
+                        if ($.trim(responseText) == 'Success') {
+                            $(".success_message").show();
+                            $(".success_message").find('.msg').html("Status updated successfully.");
+                            $("#planmodal").modal('hide');
+                            if (tab == 'Plan') {
+                                get_plan_data();
+                            } else if (tab == 'Scheduled') {
+                                get_scheduled_data();
+                            } else if (tab == 'Inprocess') {
+                                get_inprocess_data();
+                            }
+                        } else {
+                            $(".btn").attr('disabled', false);
+                            $(".error_message").show();
+                            $(".error_message").find('.msg').html($.trim(responseText));
+                        }
+                    });
+                } else {
+                    var menu_name = (process == 'suspend_service' ? 'Suspended' : 'Cancelled');
+                    var remark = $("#remark").val();
+                    //console.log(service_doc_id);
+                    $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/markServiceStatusServlet?remark=" + remark + "&screenName=Customer Service&serviceId=" + service_doc_id + "&user=" + obj.employeeName + "&status=" + menu_name, function(responseText) {
+                        if ($.trim(responseText) == 'Status Updated Successfully.') {
+                            $(".success_message").show();
+                            $(".success_message").find('.msg').html(responseText);
+                            $("#planmodal").modal('hide');
+                            if (tab == 'Plan') {
+                                get_plan_data();
+                            } else if (tab == 'Scheduled') {
+                                get_scheduled_data();
+                            } else if (tab == 'Inprocess') {
+                                get_inprocess_data();
+                            }
+                        } else {
+                            $(".btn").removeAttr('disabled');
+                            $(".error_message").show();
+                            $(".error_message").find('.msg').html($.trim(responseText));
+                        }
+                    });
+                }
+            } else {
+                $(".btn").removeAttr('disabled');
+            }
+        }
+
+        function validate_form_data(process) {
+            var str = 'true';
+            if (process == 'plan' || process == 'scheduled_service') {
+                var date = document.getElementById("service_date").value;
+                var time = document.getElementById("service_time").value;
+                var technician = document.getElementById("technician_name").value;
+                if (date == '') {
+                    $(".service_date").show();
+                    $(".service_date_err").html('Service Date required.');
+                    str = 'false';
+                } else {
+                    $(".service_date").hide();
+                    $(".service_date_err").html('');
+                }
+                if (time == '') {
+                    $(".service_time").show();
+                    $(".service_time_err").html('Service Time required.');
+                    str = 'false';
+                } else {
+                    $(".service_time").hide();
+                    $(".service_time_err").html('');
+                }
+                if (technician == '') {
+                    $(".technician_name").show();
+                    $(".technician_name_err").html('Technician name required.');
+                    str = 'false';
+                } else {
+                    $(".technician_name").hide();
+                    $(".technician_name_err").html('');
+                }
+            } else if (process == 'technician') {
+                var technician = document.getElementById("technician_name").value;
+                if (technician == '') {
+                    $(".technician_name").show();
+                    $(".technician_name_err").html('Technician name required.');
+                    str = 'false';
+                } else {
+                    $(".technician_name").hide();
+                    $(".technician_name_err").html('');
+                }
+            } else if (process == 'suspend_service' || process == 'cancel') {
+                var remark = document.getElementById("remark").value;
+                if (remark == '') {
+                    $(".remark").show();
+                    $(".remark_err").html('Remark required.');
+                    str = 'false';
+                } else {
+                    $(".remark").hide();
+                    $(".remark_err").html('');
+                }
+            }
+            return str;
+        }
+
+        function open_modal(process, cnt) {
+            $("#cnt").val(cnt);
+            if (process == 'plan') {
+                $(".plan_list").show();
+                $(".tech_list").show();
+                $(".suspend_list").show();
+                $(".scheduled_list").show();
+                $(".rescheduled_list").hide();
+                $(".cancel_list").show();
+                $(".resume_list").hide();
+            } else if (process == 'scheduled') {
+                $(".plan_list").show();
+                $(".tech_list").show();
+                $(".suspend_list").show();
+                $(".scheduled_list").hide();
+                $(".cancel_list").show();
+                $(".rescheduled_list").show();
+                $(".resume_list").hide();
+            } else if (process == 'inprocess_service') {
+                $(".plan_list").hide();
+                $(".tech_list").hide();
+                $(".suspend_list").hide();
+                $(".scheduled_list").hide();
+                $(".cancel_list").show();
+                $(".rescheduled_list").hide();
+                $(".resume_list").show();
+            }
+            $('#assignmodal').modal('show');
+        }
+
+        function set_specific_reason() {
+            var str;
+            if ($("#reason").val() == 1) {
+                str = 'Customer not available';
+            } else {
+                str = 'My remarks';
+            }
+            $("#specific_reason").val(str);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Create Customer - EVA Pedio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker.css" rel="stylesheet" />
+    <style>
+        .datepicker td,
+        .datepicker th {
+            width: 2.0rem;
+            height: 2.0rem;
+            font-size: 0.8rem;
+        }
+        
+        .datepicker {
+            margin-bottom: 3rem;
+        }
+        
+        body {
+            min-height: 100vh;
+            background-color: #fafafa;
+        }
+        
+        .datepicker-dropdown {
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-text mx-3"><img src="img/white-logo.png"></div>
+            </a>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home </span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="multilevel-approval.html">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Multilevel Approval</span></a>
+            </li>
+            <li class="nav-item active mt-3">
+                <a class="nav-link" href="create-customer.html">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Create Service</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onClick="logout();">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span>Signout</span>
+                </a>
+            </li>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <h6 style="margin: 25px;font-size:16px"><b>Create Customer Contract</b></h6>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown show bd1">
+                            <a class="nav-link dropdown-toggle" href="dashboard.html">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+
+                            </a>
+                            <!-- Dropdown - User Information -->
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="head-back">
+                        <h5 style="text-align:center;font-size: 18px;">Create Customer Contract</h5>
+                    </div>
+                    <div class="row mt-12 maindivv">
+
+                        <!-- New request -->
+                        <div class="col-xl-12 col-md-12 mb-12">
+                            <div class="alert alert-success success_message" role="alert" style="display:none;">
+                                <i class="fa fa-check" aria-hidden="true"> </i>
+                                <span class="msg"></span>
+                            </div>
+                            <div class="alert alert-danger error_message" role="alert" style="display:none;">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                <span class="msg"></span>
+                            </div>
+                            <form>
+                                <div><a class="open-button" href="create-new-customer.html"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                                <div class="form-group mt-5">
+                                    <label class="ft-14">Name <span class="red">*</span></label>
+                                    <!--<input type="text" class="form-control" id="customer_name" aria-describedby="customer_name" placeholder="" autocomplete="off" tabindex="1" onkeyup="only_alphanumeric(this);">-->
+                                    <select class="form-control" id="customer_name" tabindex="1" onchange="get_data(this);"></select>
+                                    <div class="alert alert-danger customer_name" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="customer_name_err"></span>
+                                    </div>
+                                </div>
+                                <div><label class="ft-14 customer_data" style="display:none;"></label></div>
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <label class="ft-14">Service Date <span class="red">*</span></label>
+                                        <!--<input type="date" class="form-control eva_date" id="service_date" data-date="" data-date-format="DD/MM/YYYY" placeholder="DD/MM/YYYY" autocomplete="off" tabindex="2" value="">-->
+                                        <input type="text" class="form-control eva_date" id="service_date" placeholder="DD/MM/YYYY" data-date-format="dd/mm/yyyy" autocomplete="off" tabindex="2" value="">
+                                        <div class="alert alert-danger service_date" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="service_date_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="position: relative;">
+                                        <label class="ft-14">Service Time <span class="red">*</span></label>
+                                        <input type="text" class="form-control" placeholder="HH:MM" id="service_time" tabindex="3">
+                                        <input type="time" class="s_time form-control" style="position: absolute; top: 22px;width: 27px; right: 17px; background: transparent; border: none; font-size: 1rem !important; padding: 0px; height: 32px;" onchange="show_time('service_time');">
+                                        <div class="alert alert-danger service_time" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="service_time_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="ft-14 mt-10">Technician Name <span class="red">*</span></label>
+                                    <!--<input type="text" class="form-control" id="technician_name" aria-describedby="technician_name" placeholder="Technician Name" autocomplete="off" tabindex="4" onkeyup="only_alphanumeric(this);">-->
+                                    <select class="form-control" id="technician_name" tabindex="4"></select>
+                                    <div class="alert alert-danger technician_name" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="technician_name_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Branch <span class="red">*</span></label>
+                                    <!--<input type="text" class="form-control" id="branch" aria-describedby="branch" placeholder="Branch" autocomplete="off" tabindex="5" onkeyup="only_alphanumeric(this);">-->
+                                    <select class="form-control" id="branch" tabindex="5"></select>
+                                    <div class="alert alert-danger branch" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="branch_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Frequency of Services (In Day's) <span
+                                            class="red">*</span></label>
+                                    <input type="text" onkeyup="only_numeric(this);" class="form-control" id="frequency_of_service" aria-describedby="frequency_of_service" placeholder="Frequency of Services" autocomplete="off" tabindex="6">
+                                    <div class="alert alert-danger frequency_of_service" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="frequency_of_service_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Number of Services <span class="red">*</span></label>
+                                    <input type="text" onkeyup="only_numeric(this);" class="form-control" id="number_of_service" aria-describedby="name" placeholder="Number of Services" autocomplete="off" tabindex="7">
+                                    <div class="alert alert-danger number_of_service" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="number_of_service_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Product Name <span class="red">*</span></label>
+                                    <!--<input type="text" class="form-control" id="product_name" aria-describedby="product_name" placeholder="" autocomplete="off" tabindex="8" onkeyup="only_alphanumeric(this);">-->
+                                    <select class="form-control" id="product_name" tabindex="8"></select>
+                                    <div class="alert alert-danger product_name" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="product_name_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-10 mb-12">
+                                    <a href="javascript:void(0);" onclick="validate();" class="btn btn-info btn-user btn-block" tabindex="9">
+	                                    Submit
+	                                </a>
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="assignmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="list-group" style="margin-top: 25px;">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            Plan
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">Assign Technician</a>
+                        <a href="#" class="list-group-item list-group-item-action">Suspend Service</a>
+                        <a href="#" class="list-group-item list-group-item-action">Schedule Service</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled">Cancel Service</a>
+                    </div>
+                </div>
+                <!--<div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+         
+        </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center loadingg" style="margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display:none !important;
+    transform: translate(-50%, -50%);">
+        <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/scripts.js"></script>
+    <script src="js/select2.full.min.js"></script>
+
+    <script>
+        var name = sessionStorage.getItem("json");
+        var branchList = new Array();
+        var customerList = new Array();
+        var customerIList = new Array();
+        var customerCell = new Array();
+        var technicianNameList = new Array();
+        var serviceProductArray = new Array();
+        var serviceProductIArray = new Array();
+        var obj = $.parseJSON(name);
+        var employeeId = obj.employeeId;
+        var employeeName = obj.employeeName;
+        $(document).ready(function() {
+            $('select').select2();
+            $('#service_date').datepicker().on('changeDate', function(e) {
+                $(this).datepicker('hide');
+            });
+            var today = new Date();
+
+            var dd = today.getDate();
+
+            var mm = today.getMonth() + 1;
+
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+
+                dd = '0' + dd;
+
+            }
+
+            if (mm < 10) {
+
+                mm = '0' + mm;
+
+            }
+
+            $("#service_date").val(dd + '/' + mm + '/' + yyyy);
+            GFG_Fun();
+        });
+
+        function show_time(obj) {
+            $("#" + obj).val(convertTime24to12($(".s_time").val()));
+        }
+
+        function validate() {
+            var technician = $.trim($("#technician_name option:selected").text());
+            var username = $.trim($("#customer_name option:selected").text());
+            var product = $.trim($("#product_name option:selected").text());
+            var frequency = document.getElementById("frequency_of_service").value;
+            var number_of_service = document.getElementById("number_of_service").value;
+            var service_date = document.getElementById("service_date").value;
+            var service_date_arr = service_date.split('/');
+            var date = service_date_arr[2] + '-' + service_date_arr[1] + '-' + service_date_arr[0];
+            //console.log(date);
+            var time = document.getElementById("service_time").value;
+            var branch = $.trim($("#branch option:selected").text());
+            var str = 'true';
+            if (time == '') {
+                $(".service_time").show();
+                $(".service_time_err").html('Service Time required.');
+                str = 'false';
+            } else {
+                $(".service_time").hide();
+                $(".service_time_err").html('');
+            }
+            if (technician == '' || technician == 'Select Technician') {
+                $(".technician_name").show();
+                $(".technician_name_err").html('Technician name required.');
+                str = 'false';
+            } else {
+                $(".technician_name").hide();
+                $(".technician_name_err").html('');
+            }
+            if (branch == '' || branch == 'Select Branch') {
+                $(".branch").show();
+                $(".branch_err").html('Branch required.');
+                str = 'false';
+            } else {
+                $(".branch").hide();
+                $(".branch_err").html('');
+            }
+
+            if (date == '') {
+                $(".service_date").show();
+                $(".service_date_err").html('Service Date required.');
+                str = 'false';
+            } else {
+                $(".service_date").hide();
+                $(".service_date_err").html('');
+            }
+            if (username == '' || username == 'Select Customer') {
+                $(".customer_name").show();
+                $(".customer_name_err").html('Name required.');
+                str = 'false';
+            } else {
+                $(".customer_name").hide();
+                $(".customer_name_err").html('');
+            }
+
+            if (product == '' || product == 'Select Product') {
+                $(".product_name").show();
+                $(".product_name_err").html('Product Name required.');
+                str = 'false';
+            } else {
+                $(".product_name").hide();
+                $(".product_name_err").html('');
+            }
+            if (frequency == '') {
+                $(".frequency_of_service").show();
+                $(".frequency_of_service_err").html('Frequency of Services (In Day\'s) required.');
+                str = 'false';
+            } else {
+                $(".frequency_of_service").hide();
+                $(".frequency_of_service_err").html('');
+            }
+            if (number_of_service == '') {
+                $(".number_of_service").show();
+                $(".number_of_service_err").html('Number of Services required.');
+                str = 'false';
+            } else {
+                $(".number_of_service").hide();
+                $(".number_of_service_err").html('');
+            }
+
+            if (str == 'true') {
+                $("#customer_name").focus();
+                var time_arr = time.split(':');
+                jsonObj = [];
+                item = {};
+                item["branch"] = branch;
+                item["customerId"] = customerIList[customerList.indexOf(username)];
+                item["customerName"] = username;
+                item["serviceDate"] = date;
+                item["serviceTime"] = time_arr[0] + ':' + time_arr[1];
+                item["frequency"] = frequency;
+                item["count"] = number_of_service;
+                item["productId"] = serviceProductIArray[serviceProductArray.indexOf(product)];
+                item["productName"] = product;
+                item["technician"] = technician;
+                item["approverName"] = employeeName;
+                item["createdBy"] = employeeName;
+
+                jsonObj.push(item);
+                jsonObj = jsonObj[0];
+                jsonData = JSON.stringify(jsonObj);
+                //console.log(jsonObj);
+                $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/createServices?data=" + jsonData, function(responseText) {
+                    if ($.trim(responseText) == 'Services Created Successfully.') {
+                        $(".success_message").show();
+                        $(".msg").html(responseText);
+                        window.location = 'create-customer.html';
+                    } else {
+                        $(".btn").removeAttr('disabled');
+                        $(".error_message").show();
+                        $(".error_message").find('.msg').html($.trim(responseText));
+                    }
+                });
+            }
+        }
+
+        // Main function 
+        function GFG_Fun() {
+            $(".maindivv").hide();
+            $(".loadingg").show();
+            const api_url =
+                "https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/configDataCreation?employeeGroup&employeeName=" + employeeName + "&employeeId=" + employeeId + "&applicationName=EVA Pedio";
+            $.get(api_url, function(responseText) {
+
+                if (responseText.length > 0) {
+                    var obj = $.parseJSON(responseText);
+                    //console.log(obj);
+                    $.each(obj, function(key, value) {
+                        if (key == 'branchList') {
+                            for (var i = 0; i < value.length; i++) {
+                                branchList.push(value[i].branchName);
+                            }
+                            $("#branch").html('');
+                            var branch_html = '<option value="">Select Branch</option>';
+                            for (var i = 0; i < branchList.length; i++) {
+                                branch_html += '<option value="' + i + '">' + branchList[i] + '</option>';
+                            }
+                            $("#branch").html(branch_html);
+                        }
+                        if (key == 'customerList') {
+                            for (var i = 0; i < value.length; i++) {
+                                customerList.push(value[i].customerName);
+                                customerIList.push(value[i].customerId);
+                                customerCell.push(value[i].customerCell);
+                            }
+                            $("#customer_name").html('');
+                            var customer_html = '<option value="">Select Customer</option>';
+                            for (var i = 0; i < customerList.length; i++) {
+                                customer_html += '<option value="' + i + '">' + customerList[i] + '</option>';
+                            }
+                            $("#customer_name").html(customer_html);
+                        }
+                        if (key == 'technicianNameList') {
+                            for (var i = 0; i < value.length; i++) {
+                                technicianNameList.push(value[i].technicianName);
+                            }
+                            $("#technician_name").html('');
+                            var tech_html = '<option value="">Select Technician</option>';
+                            for (var i = 0; i < technicianNameList.length; i++) {
+                                tech_html += '<option value="' + i + '">' + technicianNameList[i] + '</option>';
+                            }
+                            $("#technician_name").html(tech_html);
+                        }
+                        if (key == 'serviceProductArray') {
+                            for (var i = 0; i < value.length; i++) {
+                                serviceProductArray.push(value[i].productName);
+                                serviceProductIArray.push(value[i].id);
+                            }
+                            $("#product_name").html('');
+                            var product_html = '<option value="">Select Product</option>';
+                            for (var i = 0; i < serviceProductArray.length; i++) {
+                                product_html += '<option value="' + serviceProductIArray[i] + '">' + serviceProductArray[i] + '</option>';
+                            }
+                            $("#product_name").html(product_html);
+                        }
+                    });
+                    //console.log(customerList);
+                    var cust_name = sessionStorage.getItem('fname');
+                    if (cust_name != '' && cust_name != null) {
+                        cust_name = cust_name.toUpperCase();
+                    }
+
+                    $("#customer_name").val(customerList.indexOf(cust_name));
+                    sessionStorage.removeItem('fname');
+                    $("#customer_name").trigger('change');
+                }
+                $('.spinner-grow').css({
+                    'display': 'none'
+                });
+                $(".loadingg").hide();
+                $(".maindivv").show();
+            });
+        }
+    </script>
+</body>
+
+</html>

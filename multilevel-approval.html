@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Multilevel Approval - EVA Pedio</title>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-text mx-3"><img src="img/white-logo.png"></div>
+            </a>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item mt-3">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home </span></a>
+            </li>
+            <li class="nav-item active mt-3">
+                <a class="nav-link" href="multilevel-approval.html">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Multilevel Approval</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="create-customer.html">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Create Service</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onClick="logout();">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span>Signout</span>
+                </a>
+            </li>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <!-- <div class="text-center d-none d-md-inline">
+					<button class="rounded-circle border-0" id="sidebarToggle"></button>
+					</div> -->
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+						</button>
+                    <h6 style="margin: 25px;font-size:16px"><b>Multilevel Approval</b></h6>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown show bd1">
+                            <a class="nav-link dropdown-toggle" href="dshboard.html">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="row mt-12">
+                        <!-- New request -->
+                        <div class="col-xl-12 col-md-12 mb-12">
+                            <div class="">
+                                <!-- Page Heading -->
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" style="width: 50%;text-align: center;" onclick="get_requested_to_me();">REQUESTED TO ME</a>
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" style="width: 50%;text-align: center;" onclick="get_requested_by_me();">REQUESTED BY ME</a>
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <div class="row mt-10 requested_to_me"></div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                        <div class="row mt-10 requested_by_me"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <!-- <footer class="sticky-footer bg-white">
+					<div class="container my-auto">
+					  <div class="copyright text-center my-auto">
+					    <span>Copyright &copy; Your Website 2019</span>
+					  </div>
+					</div>
+					</footer> -->
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <div class="modal fade" id="requested_to_me_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/scripts.js"></script>
+    <script>
+        var requested_to_me = '';
+        var name = sessionStorage.getItem("json");
+        var obj = $.parseJSON(name);
+
+        get_requested_to_me();
+
+        function get_requested_by_me() {
+            var requested_by_me = '';
+            $(".requested_by_me").html(requested_by_me);
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsNotifications?employeeName=" + obj.employeeName + "&taskToPerform=requestedByMe&data", function(responseText) {
+                var json = JSON.parse(responseText);
+                console.log(json);
+                for (i = 0; i < Object.keys(json).length; i++) {
+                    requested_by_me += '<div class="col-xl-4 col-md-6 mb-4">' +
+                        '<div class="card shadow h-100 py-2">' +
+                        '<div class="card-body">' +
+                        '<div class="row no-gutters">' +
+                        '<div class="col-12">' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">BP Name</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].name + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Employee</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + obj.employeeName + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Doc Id</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].docId + ' / ' + json[i].docType + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Branch</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].branch + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Requested By</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].requestedBy + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Requested Date</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].requestedDate + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">';
+                    if (json[i].status == 'Pending') {
+                        /*requested_by_me += '<div class="col-4">' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'approve\',\'' + i + '\');" class="btn btn-success btn-user btn-block"><i class="fa fa-check" aria-hidden="true" style="font-size:20px"></i></a>' +
+                            '</div>' +
+                            '<div class="col">' +
+                            '<a href="javascript:void(0);" onClick="open_form(\'reject\',\'' + i + '\');" class="btn btn-danger btn-user btn-block"><i class="fa fa-times" aria-hidden="true" style="font-size:20px"></i> </a>' +
+                            '</div>';*/
+                    }
+                    requested_by_me += '<div class="col">' +
+                        '<a target="_blank" href="' + json[i].linkToCall + '" class="btn btn-warning btn-user btn-block"><i class="fa fa-file" aria-hidden="true" style="font-size:20px"></i></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+                $(".requested_by_me").html(requested_by_me);
+            });
+        }
+
+        function get_requested_to_me() {
+            var requested_to_me = '';
+            $(".requested_to_me").html(requested_to_me);
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsNotifications?employeeName=" + obj.employeeName + "&taskToPerform=requestedToMe&data", function(responseText) {
+                var json = JSON.parse(responseText);
+                console.log(json);
+                for (i = 0; i < Object.keys(json).length; i++) {
+                    requested_to_me += '<div class="col-xl-4 col-md-6 mb-4">' +
+                        '<div class="card shadow h-100 py-2">' +
+                        '<div class="card-body">' +
+                        '<div class="row no-gutters">' +
+                        '<div class="col-12">' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<input type="hidden" id="approval_count_' + i + '" value="' + json[i].approvalCount + '">' +
+                        '<label class="ft-14">BP Name</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].name + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Employee</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + obj.employeeName + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Doc Id</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14 doc_id_' + i + '">' + json[i].docId + ' / ' + json[i].docType + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Branch</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].branch + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Requested By</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].requestedBy + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-5">' +
+                        '<label class="ft-14">Requested Date</label>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<label class="ft-14">' + json[i].requestedDate + '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="form-row">' +
+                        '<div class="col-4">' +
+                        '<a href="javascript:void(0);" onClick="open_form(\'approve\',\'' + i + '\');" class="btn btn-success btn-user btn-block"><i class="fa fa-check" aria-hidden="true" style="font-size:20px"></i></a>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<a href="javascript:void(0);" onClick="open_form(\'reject\',\'' + i + '\');" class="btn btn-danger btn-user btn-block"><i class="fa fa-times" aria-hidden="true" style="font-size:20px"></i> </a>' +
+                        '</div>' +
+                        '<div class="col">' +
+                        '<a target="_blank" href="' + json[i].linkToCall + '" class="btn btn-warning btn-user btn-block"><i class="fa fa-file" aria-hidden="true" style="font-size:20px"></i></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+                $(".requested_to_me").html(requested_to_me);
+            });
+        }
+
+        function open_form(process, i) {
+            $html = '';
+            $html += '<div class="modal-header">' +
+                '<h5 class="modal-title">Remark</h5>' +
+                '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>' +
+                '<div class="modal-body">' +
+                '<div class="alert alert-success success_message" role="alert" style="display:none;">' +
+                '<i class="fa fa-check" aria-hidden="true"> </i>' +
+                '<span class="msg"></span>' +
+                '</div>' +
+                '<div class="alert alert-danger error_message" role="alert" style="display:none;">' +
+                '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                '<span class="msg"></span>' +
+                '</div>' +
+                '<form id="approve_reject" method="post">' +
+                '<input type="hidden" name="process" id="process" value="' + process + '">' +
+                '<input type="hidden" name="approval_count" id="a_count" value="' + $("#approval_count_" + i).val() + '">' +
+                '<div class="row">' +
+                '<div class="col">' +
+                '<label class="ft-14">Doc Id / Doc Type : </label>' +
+                '</div>' +
+                '<div class="col">' +
+                '<label class="ft-14">' + $(".doc_id_" + i).html() + '</label>' +
+                '</div>' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label class="ft-14 mt-10">Remark </label>' +
+                '<textarea class="form-control" id="remark" aria-describedby="remark" placeholder="" autocomplete="off" tabindex="4"></textarea>' +
+                '<div class="alert alert-danger remark" role="alert" style="display:none;">' +
+                '<i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>' +
+                '<span class="remark_err"></span>' +
+                '</div>' +
+                '</div>' +
+                '</form>' +
+                '</div>' +
+                '<div class="modal-footer">' +
+                '<button type="button" id="btn_approve_reject" onClick="submit_form(\'' + process + '\');" class="btn btn-success">' + capitalize(process) + '</button>' +
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                '</div>';
+            $("#requested_to_me_modal").find(".modal-body").html($html);
+            $("#requested_to_me_modal").modal('show');
+        }
+
+        function submit_form(process) {
+            $(".btn").attr('disabled', true);
+            jsonObj = [];
+            item = {};
+            item["count"] = $("#a_count").val();
+            item["remark"] = $("#remark").val();
+
+            jsonObj.push(item);
+            jsonObj = jsonObj[0];
+            jsonData = JSON.stringify(jsonObj);
+
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/analyticsNotifications?employeeName=" + obj.employeeName + "&taskToPerform=" + process.toUpperCase() + "&data=" + jsonData, function(responseText) {
+                console.log($.trim(responseText));
+                if ($.trim(responseText).toLowerCase() == 'success') {
+                    $(".success_message").show();
+                    $(".success_message").find('.msg').html(capitalize(process) + 'ed successfully.');
+                    $("#requested_to_me_modal").modal('hide');
+                    get_requested_to_me();
+                } else {
+                    $(".btn").removeAttr('disabled');
+                    $(".error_message").show();
+                    if ($.trim(responseText) == '') {
+                        $(".error_message").find('.msg').html('Something went wrong. Please try again.');
+                    } else {
+                        $(".error_message").find('.msg').html($.trim(responseText));
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Login - EVA Pedio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .brand {
+            font-size: 18px;
+            padding-top: 5px;
+            color: #58a3d6;
+        }
+        
+        .form-label-group input:not(:placeholder-shown) {
+            padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (1 / 6));
+            padding-bottom: calc(var(--input-padding-y) / 9);
+        }
+        
+        .form-label-group input:not(:placeholder-shown)~label {
+            padding-top: calc(var(--input-padding-y) / 3);
+            padding-bottom: calc(var(--input-padding-y) / 3);
+            font-size: 10px;
+            color: #777;
+        }
+        
+        .form-label-group>input,
+        .form-label-group>label {
+            padding: 8px 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid" onload="load()">
+
+        <div class="row justify-content-center maindivv">
+            <div class="col-12 col-xl-7 col-lg-7 bg-login-image login_l"></div>
+            <div class="col-12 col-xl-5 col-lg-5 login_r">
+                <div class="p-5  r_corner">
+                    <div>
+                        <div class="text-center mt-4">
+                            <div><img src="img/logo.png"></div>
+                            <p class="brand">EVA Software Solutions</p>
+                        </div>
+                        <div class="alert alert-danger error_message" role="alert" style="display:none;">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                            <span class="msg"></span>
+                        </div>
+                        <form class="p-5 align-middle">
+                            <h3>Welcome to EVA !</h3>
+                            <div class="form-group">
+                                <label for="inputEmail">Username</label>
+                                <input type="email" id="inputEmail" onkeyup="only_alphanumeric1(this);" class="form-control" placeholder="Username" autocomplete="off" tabindex="1">
+                                <div class="alert alert-danger username" role="alert" style="display:none;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                    <span class="username_err"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" tabindex="2">
+                                <a href="#" onclick="myFunction()" class="showhide float-right" id="hideshow">Show</a>
+                                <div class="alert alert-danger password" role="alert" style="display:none;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                    <span class="password_err"></span>
+                                </div>
+                                <p class="mt-10"><a class="small" href="forgot-password.html">Forgot Password?</a></p>
+                            </div>
+                            <a href="#" onclick="check()" class="btn btn-primary btn-user btn-block" tabindex="6">Login</a>
+                            <h6 class="mt-10" style="text-align:center">New to EVA? <a href="registration.html" style="font-size:14px" tabindex="7"> Register Now </a></h6>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex justify-content-center loadingg" style="margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display:none !important;
+    transform: translate(-50%, -50%);">
+            <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/scripts.js"></script>
+        <script>
+            function check() {
+                $(".loadingg").show();
+                var password = document.getElementById("inputPassword").value;
+                var username = document.getElementById("inputEmail").value;
+                var str = 'true';
+
+                if (username == '') {
+                    $(".username").show();
+                    $(".username_err").html('Username cannot be empty.');
+                    $('.spinner-grow').css({
+                        'display': 'none'
+                    });
+                    str = 'false';
+                } else {
+                    $(".username").hide();
+                    $(".username_err").html('');
+                }
+                if (password == '') {
+                    $(".password").show();
+                    $(".password_err").html('Password cannot be empty.');
+                    $('.spinner-grow').css({
+                        'display': 'none'
+                    });
+                    str = 'false';
+                } else {
+                    $(".password").hide();
+                    $(".password_err").html('');
+                }
+                if (str == 'true') {
+                    $(".maindivv").hide();
+                    $('.loadingg').css({
+                        'display': '!important'
+                    });
+                    $('.spinner-grow').css({
+                        'display': ''
+                    });
+                    const api_url =
+                        "https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/TechnicianLoginStatus?password=" + password + "&companyId=5634472569470976&imeiNumber=869822038830607&actionTask=nRegisterDevice&applicationName=EVA Pedio&username=" + username;
+                    $.get(api_url, function(responseText) {
+                        if (responseText.length == 0) {
+                            $('.spinner-grow').css({
+                                'display': 'none'
+                            });
+                            $(".error_message").show();
+                            $(".error_message").find('.msg').html('Invalid Username or Password.');
+                            $(".maindivv").show();
+                        } else if ($.trim(responseText) == 'Device is not registered.') {
+                            $('.spinner-grow').css({
+                                'display': 'none'
+                            });
+                            $(".error_message").show();
+                            $(".error_message").find('.msg').html(responseText);
+                            $(".maindivv").show();
+                        } else {
+                            var obj = $.parseJSON(responseText);
+                            //console.log(obj.userRole);
+                            if (obj.userRole == 'ADMIN') {
+                                var password = document.getElementById("inputPassword").value;
+                                var username = document.getElementById("inputEmail").value;
+                                sessionStorage.setItem('username', username);
+                                sessionStorage.setItem('password', password);
+                                sessionStorage.setItem("json", responseText);
+                                window.location = 'dashboard.html';
+                            } else {
+                                $('.spinner-grow').css({
+                                    'display': 'none'
+                                });
+                                $(".error_message").show();
+                                $(".error_message").find('.msg').html('Login is not allowed for ' + obj.userRole);
+                                $(".maindivv").show();
+                            }
+                        }
+
+                    });
+                }
+            }
+
+            function load() {
+                $('.loadingg').css({
+                    'display': '!important'
+                });
+            }
+
+
+            function myFunction() {
+                var x = document.getElementById("inputPassword");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+
+            document.getElementById("hideshow").innerHTML = 'Show';
+        </script>
+</body>
+
+</html>

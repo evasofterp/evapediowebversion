@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Client Information - EVA Pedio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-text mx-3"><img src="img/white-logo.png"></div>
+            </a>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active mt-3">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home </span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="multilevel-approval.html">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Multilevel Approval</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="create-customer.html">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Create Service</span></a>
+            </li>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onClick="logout();">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span>Signout</span>
+                </a>
+            </li>
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <!-- <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div> -->
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                     <i class="fa fa-bars"></i>
+                    </button>
+                    <h6 style="margin: 25px;font-size:16px"><b>Service Details</b></h6>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown show bd1">
+                            <a class="nav-link dropdown-toggle" href="dashboard.html">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </a>
+                            <!-- Dropdown - User Information -->
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="head-back">
+                        <h5 style="text-align:center;font-size: 18px;">Client Information</h5>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-6 service_date"><b>-</b></div>
+                        <div class="col-6" style="text-align: center;"> <span class="red status"><b>-</b> </span></div>
+
+                    </div>
+                    <div class="row mt-12">
+                        <div class="col-10 mt-10">
+                            <div class="form-row">
+                                <div class="col-5">
+                                    <label class="info-color"><b>Service</b></label>
+                                </div>
+                                <div class="col">
+                                    <label class="service">-</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-5">
+                                    <label class="info-color"><b>Technician</b></label>
+                                </div>
+                                <div class="col">
+                                    <label class="tech">-</label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-5">
+                                    <label class="info-color"><b>Name</b></label>
+                                </div>
+                                <div class="col">
+                                    <label class="name">-</label>
+                                    <p class="address"></p>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-5">
+                                    <label class="info-color"><b>Description</b></label>
+                                </div>
+                                <div class="col">
+                                    <label class="desc">-</label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <a href="javascript:void(0);" class="phone">
+                                <i class="fa fa-phone fa-4x icon-phone mt-10" aria-hidden="true"></i>
+                            </a>
+                            <a href="http://maps.google.com/maps?f=d&daddr=" + service_address_lat_long + "&dirflg=d&layer=t"><i class="fa fa-location-arrow fa-4x icon-map mt-10" aria-hidden="true"></i></a>
+                        </div>
+
+                    </div>
+
+                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyBw8JwWiPtajZXxX6wVwW9PSrxJaTKUYEE"></script>-->
+    <!-- Custom scripts for all pages-->
+    <script src="js/scripts.js"></script>
+    <script>
+        show_service_details();
+
+        function show_service_details() {
+            var name = sessionStorage.getItem("json");
+            var obj = $.parseJSON(name);
+
+            var ss_from_date1 = sessionStorage.getItem('ss_from_date');
+            var ss_service_id = sessionStorage.getItem('ss_service_id');
+            var ss_team = sessionStorage.getItem('ss_team');
+            $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/contractwiseservicesfetchservlet?fromDate=" + ss_from_date1 + "&companyId=5634472569470976&team=" + (obj.employeeName.toLowerCase()).replace(' ', '') + "&type=service&serviceId=" + ss_service_id + "&toDate=" + ss_from_date1, function(responseText) {
+                if (responseText == 'Failed') {} else {
+                    var json = JSON.parse(responseText);
+                    for (i = 0; i < Object.keys(json).length; i++) {
+                        for (j = 0; j < Object.keys(json[i].service).length; j++) {
+                            $(".service").html(json[i].service[j].serviceName + ' / ' + json[i].service[j].serviceId);
+                            $(".name").html(json[i].service[j].clientfullname);
+                            $(".address").html(json[i].service[j].fullAddress);
+                            $(".desc").html(json[i].service[j].description);
+                            $(".phone").attr('href', 'tel:+' + json[i].service[j].cellNo);
+                            $(".service_date").html('<b>' + json[i].service[j].serviceDate + ' / ' + json[i].service[j].serviceTime + '</b>');
+                            $(".status").html('<b>' + (json[i].service[j].status).toUpperCase() + '</b>');
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
