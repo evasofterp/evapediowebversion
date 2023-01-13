@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Create Customer - EVA Pedio</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        /*the container must be positioned relative:*/
+        
+        .autocomplete {
+            position: relative;
+        }
+        
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+        
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+        /*when hovering an item:*/
+        
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        /*when navigating through the items using the arrow keys:*/
+        
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body id="page-top" onload="GFG_Fun();">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-text mx-3"><img src="img/white-logo.png"></div>
+            </a>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span>Home </span></a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="multilevel-approval.html">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span>Multilevel Approval</span></a>
+            </li>
+            <li class="nav-item active mt-3">
+                <a class="nav-link" href="create-customer.html">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Create Service</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onClick="logout();">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    <span>Signout</span>
+                </a>
+            </li>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-2 static-top">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <h6 style="margin: 25px;font-size:16px"><b>Create Customer Contract</b></h6>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown show bd1">
+                            <a class="nav-link dropdown-toggle" href="dashboard.html">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+
+                            </a>
+                            <!-- Dropdown - User Information -->
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="head-back">
+                        <h5 style="text-align:center;font-size: 18px;">Create Customer Contract</h5>
+                    </div>
+                    <div class="row mt-12">
+
+                        <!-- New request -->
+                        <div class="col-xl-12 col-md-12 mb-12">
+                            <div class="alert alert-success success_message" role="alert" style="display:none;">
+                                <i class="fa fa-check" aria-hidden="true"> </i>
+                                <span class="msg"></span>
+                            </div>
+                            <div class="alert alert-danger error_message" role="alert" style="display:none;">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                <span class="msg"></span>
+                            </div>
+                            <form>
+                                <div class="form-group autocomplete">
+                                    <label class="ft-14">Name <span class="red">*</span></label>
+                                    <input type="text" class="form-control" id="customer_name" aria-describedby="customer_name" placeholder="" autocomplete="off" tabindex="1">
+                                    <a class="open-button" href="create-new-customer.html"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    <label class="ft-14 customer_data" style="display:none;"></label>
+                                    <div class="alert alert-danger customer_name" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="customer_name_err"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="ft-14">Service Date <span class="red">*</span></label>
+                                        <input type="date" class="form-control" id="service_date" placeholder="" autocomplete="off" tabindex="2">
+                                        <div class="alert alert-danger service_date" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="service_date_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label class="ft-14">Service Time <span class="red">*</span></label>
+                                        <input type="time" class="form-control" placeholder="" id="service_time" tabindex="3">
+                                        <div class="alert alert-danger service_time" role="alert" style="display:none;">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                            <span class="service_time_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group autocomplete">
+                                    <label class="ft-14 mt-10">Technician Name <span class="red">*</span></label>
+                                    <input type="text" class="form-control" id="technician_name" aria-describedby="technician_name" placeholder="Technician Name" autocomplete="off" tabindex="4">
+                                    <div class="alert alert-danger technician_name" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="technician_name_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group autocomplete">
+                                    <label class="ft-14">Branch <span class="red">*</span></label>
+                                    <input type="text" class="form-control" id="branch" aria-describedby="branch" placeholder="Branch" autocomplete="off" tabindex="5">
+                                    <div class="alert alert-danger branch" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="branch_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Frequency of Services (In Day's) <span
+                                            class="red">*</span></label>
+                                    <input type="text" onkeyup="only_numeric(this);" class="form-control" id="frequency_of_service" aria-describedby="frequency_of_service" placeholder="Frequency of Services" autocomplete="off" tabindex="6">
+                                    <div class="alert alert-danger frequency_of_service" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="frequency_of_service_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="ft-14">Number of Services <span class="red">*</span></label>
+                                    <input type="text" onkeyup="only_numeric(this);" class="form-control" id="number_of_service" aria-describedby="name" placeholder="Number of Services" autocomplete="off" tabindex="7">
+                                    <div class="alert alert-danger number_of_service" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="number_of_service_err"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group autocomplete">
+                                    <label class="ft-14">Product Name <span class="red">*</span></label>
+                                    <input type="text" class="form-control" id="product_name" aria-describedby="product_name" placeholder="" autocomplete="off" tabindex="8">
+
+                                    <div class="alert alert-danger product_name" role="alert" style="display:none;">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"> </i>
+                                        <span class="product_name_err"></span>
+                                    </div>
+                                </div>
+                                <a href="javascript:void(0);" onclick="validate()" class="btn btn-info btn-user btn-block" tabindex="9">
+                                    Submit
+                                </a>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="assignmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <div class="list-group" style="margin-top: 25px;">
+                        <a href="#" class="list-group-item list-group-item-action active">
+                            Plan
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">Assign Technician</a>
+                        <a href="#" class="list-group-item list-group-item-action">Suspend Service</a>
+                        <a href="#" class="list-group-item list-group-item-action">Schedule Service</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled">Cancel Service</a>
+                    </div>
+                </div>
+                <!--<div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+         
+        </div>-->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/scripts.js"></script>
+    <script>
+        var name = sessionStorage.getItem("json");
+        var branchList = new Array();
+        var customerList = new Array();
+        var customerIList = new Array();
+        var customerCell = new Array();
+        var technicianNameList = new Array();
+        var serviceProductArray = new Array();
+        var serviceProductIArray = new Array();
+        var obj = $.parseJSON(name);
+        var employeeId = obj.employeeId;
+        var employeeName = obj.employeeName;
+
+        function validate() {
+            var technician = document.getElementById("technician_name").value;
+            var username = document.getElementById("customer_name").value;
+            var product = document.getElementById("product_name").value;
+            var frequency = document.getElementById("frequency_of_service").value;
+            var number_of_service = document.getElementById("number_of_service").value;
+            var date = document.getElementById("service_date").value;
+            var time = document.getElementById("service_time").value;
+            var branch = document.getElementById("branch").value;;
+            var str = 'true';
+            if (time == '') {
+                $(".service_time").show();
+                $(".service_time_err").html('Service Time required.');
+                str = 'false';
+            } else {
+                $(".service_time").hide();
+                $(".service_time_err").html('');
+            }
+            if (technician == '') {
+                $(".technician_name").show();
+                $(".technician_name_err").html('Technician name required.');
+                str = 'false';
+            } else {
+                $(".technician_name").hide();
+                $(".technician_name_err").html('');
+            }
+            if (branch == '') {
+                $(".branch").show();
+                $(".branch_err").html('Branch required.');
+                str = 'false';
+            } else {
+                $(".branch").hide();
+                $(".branch_err").html('');
+            }
+
+            if (date == '') {
+                $(".service_date").show();
+                $(".service_date_err").html('Service Date required.');
+                str = 'false';
+            } else {
+                $(".service_date").hide();
+                $(".service_date_err").html('');
+            }
+            if (username == '') {
+                $(".customer_name").show();
+                $(".customer_name_err").html('Name required.');
+                str = 'false';
+            } else {
+                $(".customer_name").hide();
+                $(".customer_name_err").html('');
+            }
+
+            if (product == '') {
+                $(".product_name").show();
+                $(".product_name_err").html('Product Name required.');
+                str = 'false';
+            } else {
+                $(".product_name").hide();
+                $(".product_name_err").html('');
+            }
+            if (frequency == '') {
+                $(".frequency_of_service").show();
+                $(".frequency_of_service_err").html('Frequency of Services (In Day\'s) required.');
+                str = 'false';
+            } else {
+                $(".frequency_of_service").hide();
+                $(".frequency_of_service_err").html('');
+            }
+            if (number_of_service == '') {
+                $(".number_of_service").show();
+                $(".number_of_service_err").html('Number of Services required.');
+                str = 'false';
+            } else {
+                $(".number_of_service").hide();
+                $(".number_of_service_err").html('');
+            }
+
+            if (str == 'true') {
+                jsonObj = [];
+                item = {};
+                item["branch"] = branch;
+                item["customerId"] = customerIList[customerList.indexOf(username)];
+                item["customerName"] = username;
+                item["serviceDate"] = date;
+                item["serviceTime"] = 'Flexible';
+                item["frequency"] = frequency;
+                item["count"] = number_of_service;
+                item["productId"] = serviceProductIArray[serviceProductArray.indexOf(product)];
+                item["productName"] = product;
+                item["technician"] = technician;
+                item["approverName"] = technician;
+                item["createdBy"] = sessionStorage.getItem('username');
+
+                jsonObj.push(item);
+                jsonObj = jsonObj[0];
+                jsonData = JSON.stringify(jsonObj);
+                //console.log(jsonObj);
+                $.get("https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/createServices?data=" + jsonData, function(responseText) {
+                    $(".success_message").show();
+                    $(".msg").html(responseText);
+                    setTimeout(function() {
+                        window.location = 'create-customer.html';
+                    }, 3000);
+                });
+            }
+        }
+
+        // Main function 
+        function GFG_Fun() {
+            $("#customer_name").val(sessionStorage.getItem('fname'));
+            $("#customer_name").trigger('keyup');
+            sessionStorage.removeItem('fname');
+            const api_url =
+                "https://my-dot-" + localStorage.getItem('access_link') + ".appspot.com/slick_erp/configDataCreation?employeeGroup&employeeName=" + employeeName + "&employeeId=" + employeeId + "&applicationName=EVA Pedio";
+            $.get(api_url, function(responseText) {
+
+                if (responseText.length > 0) {
+                    var obj = $.parseJSON(responseText);
+                    //console.log(obj);
+                    $.each(obj, function(key, value) {
+                        if (key == 'branchList') {
+                            var obj1 = JSON.stringify(value);
+                            for (var i = 0; i < value.length; i++) {
+                                branchList.push(value[i].branchName);
+                            }
+                        }
+                        if (key == 'customerList') {
+                            var obj1 = JSON.stringify(value);
+                            for (var i = 0; i < value.length; i++) {
+                                customerList.push(value[i].customerName);
+                                customerIList.push(value[i].customerId);
+                                customerCell.push(value[i].customerCell);
+                            }
+                        }
+                        if (key == 'technicianNameList') {
+                            var obj1 = JSON.stringify(value);
+                            for (var i = 0; i < value.length; i++) {
+                                technicianNameList.push(value[i].technicianName);
+                            }
+                        }
+                        if (key == 'serviceProductArray') {
+                            var obj1 = JSON.stringify(value);
+                            for (var i = 0; i < value.length; i++) {
+                                serviceProductArray.push(value[i].productName);
+                                serviceProductIArray.push(value[i].id);
+                            }
+                        }
+                    });
+
+
+                }
+
+            });
+        }
+
+        autocomplete(document.getElementById("customer_name"), customerList, 'cname');
+        autocomplete(document.getElementById("branch"), branchList);
+        autocomplete(document.getElementById("technician_name"), technicianNameList);
+        autocomplete(document.getElementById("product_name"), serviceProductArray);
+    </script>
+</body>
+
+</html>
